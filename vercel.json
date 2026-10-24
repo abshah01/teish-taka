@@ -1,1 +1,1 @@
-{"cleanUrls":true}
+{"version":2,"builds":[{"src":"api-order.js","use":"@vercel/node"},{"src":"api-admin.js","use":"@vercel/node"},{"src":"api-public.js","use":"@vercel/node"},{"src":"*.html","use":"@vercel/static"}],"routes":[{"handle":"filesystem"},{"src":"/api/order","dest":"/api-order.js"},{"src":"/api/admin","dest":"/api-admin.js"},{"src":"/api/public","dest":"/api-public.js"},{"src":"/admin","dest":"/admin.html"},{"src":"/","dest":"/index.html"}]}
