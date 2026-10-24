@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>তেইশ টাকা — হাতে লেখা চিঠি</title><link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✉️</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Atma:wght@500;700&family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--y:#FFC93C;--pink:#FBE0D8;--terra:#D9684A;--brown:#3B2318;--red:#D8382F;--teal:#1F7A8C;--bg:#FFFDF8}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font:18px/1.85 'Hind Siliguri',sans-serif;color:var(--brown);background:var(--bg)}
+h1,h2,legend,.d{font-family:Atma,cursive;font-weight:700;line-height:1.2;margin:0}
+.top{background:var(--y);display:flex;justify-content:space-around;gap:10px;font-size:.85rem;font-weight:600;padding:6px 10px;overflow:hidden;white-space:nowrap}
+.top span:nth-child(n+3){display:none}@media(min-width:700px){.top span:nth-child(n+3){display:inline}}
+nav{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;background:#fff;border-bottom:2px solid var(--brown);position:sticky;top:0;z-index:5}
+nav a{color:var(--brown);text-decoration:none;font-weight:500;font-size:.95rem;margin-right:14px}nav .l{display:none}@media(min-width:700px){nav .l{display:block}}
+nav .logo{font:700 1.9rem Atma;color:var(--brown);margin:0;position:absolute;left:50%;transform:translateX(-50%)}
+.hero{position:relative;border-bottom:3px solid var(--brown)}.hero svg{display:block;width:100%;height:clamp(320px,62vw,500px)}
+.hero .w{position:absolute;left:4%;top:8%;font:700 clamp(3.4rem,15vw,8.5rem)/1 Atma;color:rgba(255,201,60,.95);text-shadow:3px 3px 0 var(--brown);margin:0;pointer-events:none}
+.hero .b{position:absolute;left:3%;bottom:5%;max-width:min(300px,80%);background:var(--y);border:2px solid var(--brown);border-radius:10px;padding:8px 14px;font-weight:600;font-size:.95rem;line-height:1.5;color:var(--brown);text-decoration:none;box-shadow:4px 4px 0 var(--brown)}
+.btn{display:inline-block;background:var(--y);color:var(--brown);border:2px solid var(--brown);border-radius:999px;padding:10px 30px;font:700 1.15rem Atma;cursor:pointer;text-decoration:none;box-shadow:4px 4px 0 var(--brown)}
+.btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--brown)}
+.btn:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+section{padding:46px 18px}.in{max-width:720px;margin:auto}.pk{background:var(--pink)}
+h2{font-size:2.1rem;margin-bottom:10px}h2::after{content:"";display:block;width:64px;height:6px;background:var(--y);border-radius:3px;margin-top:6px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:18px}
+.card{background:#fff;border:2.5px solid var(--brown);border-radius:14px;padding:14px 16px;box-shadow:5px 5px 0 var(--y);line-height:1.6}.card b{display:block;font:700 1.15rem Atma;color:var(--terra);margin-bottom:2px}
+.two{background:var(--y);text-align:center;border-top:3px solid var(--brown);border-bottom:3px solid var(--brown)}.two h2::after{margin:6px auto 0;background:var(--brown)}.two .d{font-size:6rem;color:var(--red);text-shadow:3px 3px 0 var(--brown);display:block}
+.q{background:#fff;border-left:6px solid var(--terra);border-radius:0 10px 10px 0;padding:8px 14px;margin:12px 0}.q small{display:block;opacity:.7}
+ol{padding-left:22px}li{margin:6px 0}
+label{display:block;font-weight:600;margin:12px 0 2px}label small{font-weight:400;opacity:.7}
+input,textarea{width:100%;font:inherit;padding:9px 12px;border:2px solid var(--brown);background:#fff;color:var(--brown);border-radius:10px}
+textarea{min-height:140px;background-image:repeating-linear-gradient(transparent 0 33px,#d9684a44 33px 34px);line-height:34px;resize:vertical}
+fieldset{border:0;padding:0;margin:0 0 22px}legend{font-size:1.5rem;color:var(--teal);margin-bottom:4px}
+.chk{display:flex;gap:8px;align-items:center;margin-top:10px}.chk input{width:auto}.chk label{margin:0}
+.pay{display:grid;grid-template-columns:1fr 1fr;gap:8px}.pay label{margin:0;border:2px solid var(--brown);border-radius:10px;padding:8px 12px;cursor:pointer;display:flex;gap:6px;align-items:center;background:#fff}.pay input{width:auto}.pay .soon{opacity:.4;cursor:not-allowed}
+.amt{display:inline-block;background:var(--red);color:#fff;border-radius:8px;padding:2px 16px;font:700 1.4rem Atma;margin:4px 0 8px}.num{font:700 1.2rem Atma;color:var(--red);user-select:all}
+#err{color:var(--red);font-weight:600;min-height:1.6em}#done{display:none;text-align:center}
+footer{background:var(--brown);color:#FFF1CF;text-align:center;padding:26px 14px;font-weight:500;border-top:10px dashed var(--y)}
+</style></head><body>
+<div class="top"><span>ড্যাফোডিল ক্যাম্পাসে হাতে লেখা চিঠি</span><span>হাতে হাতে ডেলিভারি</span><span>সঙ্গে ২ টাকার নোট</span><span>পৌঁছানোর প্রমাণ WhatsApp-এ</span></div>
+<nav><span class="l"><a href="#pabe">কী পাবে</a><a href="#dui">দুই টাকার গল্প</a></span><span class="logo">তেইশ টাকা</span><a href="#order" style="margin:0" aria-label="চিঠি লেখাও">✉ চিঠি লেখাও</a></nav>
+
+<header class="hero"><svg viewBox="0 0 800 380" preserveAspectRatio="xMidYMid slice" role="img" aria-label="ঢাকার রাস্তায় রিকশা আর লাল ডাকবাক্স">
+<defs><pattern id="w" width="26" height="34" patternUnits="userSpaceOnUse"><path d="M5 30V14a8 8 0 0 1 16 0v16z" fill="#7a2f22"/><path d="M8 30V14a5 5 0 0 1 10 0v16z" fill="#f6c76a"/></pattern></defs>
+<rect width="800" height="380" fill="#F9D3CB"/>
+<path d="M0 90h800" stroke="#3B2318" stroke-width="1.5" fill="none"/><path d="M0 70q200 40 400 10t400 20" stroke="#3B2318" fill="none"/><path d="M0 100q250-30 450 0t350-10" stroke="#3B2318" fill="none"/>
+<rect x="0" y="70" width="130" height="190" fill="#E58B6B"/><rect x="130" y="40" width="120" height="220" fill="#D9684A"/><rect x="250" y="80" width="110" height="180" fill="#EFA27E"/><rect x="360" y="30" width="110" height="230" fill="#C8553C"/><rect x="470" y="70" width="140" height="190" fill="#E58B6B"/><rect x="610" y="45" width="190" height="215" fill="#D9684A"/>
+<g fill="url(#w)"><rect x="10" y="80" width="110" height="90"/><rect x="140" y="50" width="100" height="100"/><rect x="262" y="90" width="90" height="70"/><rect x="372" y="40" width="90" height="110"/><rect x="480" y="80" width="120" height="70"/><rect x="620" y="55" width="170" height="100"/></g>
+<g font-family="Atma" font-weight="700" font-size="17" text-anchor="middle"><rect x="6" y="196" width="118" height="26" fill="#FFC93C" stroke="#3B2318"/><text x="65" y="215" fill="#3B2318">চিঠিঘর</text><rect x="136" y="196" width="108" height="26" fill="#fff" stroke="#3B2318"/><text x="190" y="215" fill="#D8382F">ডাকঘর</text><rect x="256" y="196" width="98" height="26" fill="#1F7A8C" stroke="#3B2318"/><text x="305" y="215" fill="#fff">চা-নাস্তা</text><rect x="366" y="196" width="98" height="26" fill="#FFC93C" stroke="#3B2318"/><text x="415" y="215" fill="#3B2318">বই-খাতা</text><rect x="476" y="196" width="128" height="26" fill="#fff" stroke="#3B2318"/><text x="540" y="215" fill="#3B2318">মিষ্টি ঘর</text><rect x="620" y="196" width="170" height="26" fill="#D8382F" stroke="#3B2318"/><text x="705" y="215" fill="#fff">ফুল ও উপহার</text></g>
+<g><rect x="14" y="226" width="100" height="34" fill="#1F7A8C"/><rect x="144" y="226" width="90" height="34" fill="#F5B800"/><rect x="264" y="226" width="80" height="34" fill="#8a3b2a"/><rect x="374" y="226" width="80" height="34" fill="#3f7d4a"/><rect x="484" y="226" width="110" height="34" fill="#FFC93C"/><rect x="630" y="226" width="150" height="34" fill="#E8719A"/></g>
+<g fill="#3f7d4a"><circle cx="250" cy="76" r="22"/><circle cx="590" cy="150" r="26"/><circle cx="470" cy="60" r="18"/></g>
+<rect y="260" width="800" height="22" fill="#B8714F"/><rect y="282" width="800" height="98" fill="#8A8F98"/><path d="M0 335h800" stroke="#fff" stroke-width="5" stroke-dasharray="36 28"/>
+<g stroke="#3B2318" stroke-width="3"><path d="M180 130v130M420 110v150M690 120v140" /></g><g fill="#FFE07A" opacity=".85"><circle cx="180" cy="128" r="9"/><circle cx="420" cy="108" r="9"/><circle cx="690" cy="118" r="9"/></g>
+<g transform="translate(560 262)"><circle cx="20" cy="62" r="26" fill="none" stroke="#222" stroke-width="5"/><circle cx="130" cy="62" r="26" fill="none" stroke="#222" stroke-width="5"/><path d="M40 22q30-34 72 0z" fill="#D8382F" stroke="#3B2318" stroke-width="2.5"/><rect x="42" y="24" width="64" height="26" fill="#FFC93C" stroke="#3B2318" stroke-width="2.5"/><path d="M20 62L52 50h60l18 12" stroke="#3B2318" stroke-width="3" fill="none"/><circle cx="-6" cy="14" r="8" fill="#3B2318"/><path d="M-6 22l8 22 20 14" stroke="#3B2318" stroke-width="6" fill="none"/><rect x="60" y="30" width="26" height="18" fill="#FBEBD3" stroke="#3B2318"/><path d="M60 30l13 9 13-9" stroke="#D8382F" fill="none"/></g>
+<g transform="translate(60 214)"><rect width="52" height="76" rx="22" ry="10" fill="#D8382F" stroke="#3B2318" stroke-width="3"/><rect x="10" y="14" width="32" height="5" fill="#3B2318"/><text x="26" y="52" font-family="Atma" font-weight="700" font-size="15" fill="#fff" text-anchor="middle">চিঠি</text></g></svg>
+<p class="w" aria-hidden="true">চিঠি<br>এসেছে!</p><a class="b" href="#order">চিঠি যা ভালবাসা বাড়ায়</a></header>
+
+<section><div class="in"><h2>চিঠি আবার ফিরে আসুক</h2><p>সারাদিন স্ক্রিনে কথা বলি, অথচ কাউকে হাতে লেখা দুটো লাইন পাঠাইনি কতদিন! চিঠিতে কাটাকুটি থাকে, হাতের টান থাকে, অপেক্ষা থাকে। শহরের ক্লান্তিতে একটু রঙ, একটু রিফ্রেশমেন্ট। ড্যাফোডিল ইন্টারন্যাশনাল ইউনিভার্সিটির পরিবেশ সুন্দর করার ছোট্ট একটি প্রয়াস।</p></div></section>
+
+<section class="pk" id="pabe"><div class="in"><h2>কী কী পাবে</h2><div class="grid">
+<div class="card"><b>হাতে লেখা চিঠি</b>তোমার মনের কথা আমার হাতের লেখায়, সুন্দর কাগজে।</div><div class="card"><b>খামে ভরা</b>প্রাপকের নাম আর ঠিকানাসহ সুন্দর খাম।</div><div class="card"><b>২ টাকার নোট</b>চিঠির সঙ্গে একটা কচকচে নোট, ভালোবাসার চিহ্ন।</div>
+<div class="card"><b>হাতে হাতে ডেলিভারি</b>ক্যাম্পাসের ভেতরে প্রাপকের হাতে পৌঁছে দেওয়া।</div><div class="card"><b>পৌঁছানোর প্রমাণ</b>তোমার WhatsApp-এ জানিয়ে দেওয়া হবে।</div><div class="card"><b>নাম গোপন</b>চাইলে তোমার পরিচয় গোপন থাকবে।</div>
+<div class="card"><b>এক্সট্রা অপশন</b>শুকনো ফুল বা ছোট কিছু যোগ করা যাবে। এর চার্জ আলাদা।</div></div></div></section>
+
+<section class="two" id="dui"><div class="in"><h2>দুই টাকার গল্প</h2><span class="d">২</span><p>২ মানে তুমি আর আমি।<br>প্রতিটা চিঠির সঙ্গে যায় একটা কচকচে ২ টাকার নোট। দাম নয়, শুধু একটা ছোট্ট কথা: “আমরা দুজন আছি।” প্রাপক চাইলে নোটটা বইয়ের ভাঁজে রেখে দিতে পারে, অনেক বছর পরও মনে পড়বে।</p></div></section>
+
+<section><div class="in"><h2>চিঠির ইতিহাস</h2>
+<div class="q">রবীন্দ্রনাথ ঠাকুরের <b>ছিন্নপত্র</b> বাংলা সাহিত্যের সবচেয়ে সুন্দর চিঠির সংকলনগুলোর একটি, পদ্মাপাড়ের দিনগুলো যেখানে ধরা আছে।<small>— রবীন্দ্রনাথ ঠাকুর</small></div>
+<div class="q">বাংলা উপন্যাসে চিঠি বারবার এসেছে অব্যক্ত কথা বলার উপায় হয়ে। শরৎচন্দ্র আর বিভূতিভূষণের গল্পে এক টুকরো চিঠিই বদলে দেয় সবকিছু।<small>— শরৎচন্দ্র চট্টোপাধ্যায়, বিভূতিভূষণ বন্দ্যোপাধ্যায়</small></div>
+<div class="q">নজরুলও বন্ধু আর প্রিয়জনকে চিঠিতে মন উজাড় করে লিখতেন।<small>— কাজী নজরুল ইসলাম</small></div>
+<p>চিঠি বোঝায় “আমি তোমাকে ভেবেছি।” ক্ষমা, ধন্যবাদ, ভালোবাসা, সবই বলা যায় তাড়া ছাড়া, আর রেখে দেওয়া যায় বছরের পর বছর।</p></div></section>
+
+<section class="pk"><div class="in"><h2>কীভাবে হয়</h2><ol><li>নিচের ফর্মে প্রাপকের ঠিকানা আর তোমার কথা লেখো।</li><li>bKash বা Nagad-এ টাকা পাঠিয়ে TrxID দাও।</li><li>আমি হাতে লিখে খামে ভরে প্রাপকের হাতে দিয়ে আসি।</li><li>পৌঁছানোর প্রমাণ তোমার WhatsApp-এ যায়।</li></ol></div></section>
+
+<section id="order"><div class="in"><h2>চিঠি লেখাও</h2>
+<form id="f" novalidate>
+<fieldset><legend>প্রাপক</legend>
+<label>প্রাপকের নাম</label><input name="recName" required autocomplete="off">
+<label>ঠিকানা <small>(বিভাগ / হল / বিল্ডিং / রুম)</small></label><input name="recAddr" required>
+<label>প্রাপকের যোগাযোগ <small>(ফোন, ইমেইল, FB বা Insta ID)</small></label><input name="recContact" required></fieldset>
+<fieldset><legend>তোমার কথা</legend>
+<label>চিঠিতে যা লিখতে চাও</label><textarea name="message" required placeholder="প্রিয়..."></textarea>
+<label>আরও কিছু যোগ করতে চাও? <small>(আলাদা চার্জ লাগবে, আমি জানিয়ে দেব)</small></label><input name="extra" placeholder="যেমন: শুকনো ফুল, ছোট ছবি"></fieldset>
+<fieldset><legend>প্রেরক (তুমি)</legend>
+<label>তোমার নাম</label><input name="senderName">
+<div class="chk"><input type="checkbox" id="anon" name="anon"><label for="anon">নাম গোপন রাখো</label></div>
+<label>তোমার ইমেইল <small>(কনফার্মেশন যাবে)</small></label><input type="email" name="email" required>
+<label>তোমার WhatsApp নম্বর <small>(পৌঁছানোর প্রমাণ যাবে)</small></label><input name="wa" required></fieldset>
+<fieldset><legend>পেমেন্ট</legend>
+<div class="amt">মোট <span id="tot">২৫</span> টাকা</div>
+<div class="pay"><label><input type="radio" name="pay" value="bKash" checked> bKash</label><label><input type="radio" name="pay" value="Nagad"> Nagad</label>
+<label class="soon"><input type="radio" disabled> Upay</label><label class="soon"><input type="radio" disabled> Rocket</label></div>
+<p>এই নম্বরে Send Money করো: <span class="num" id="pn"></span></p>
+<label>TrxID</label><input name="trxId" required autocomplete="off"></fieldset>
+<p id="notice"></p><p id="err" role="alert"></p><button class="btn" id="go">চিঠি পাঠাও</button></form>
+<div id="done" role="status"><h2>চিঠি রওনা দিল</h2><p>অর্ডার আইডি <b id="oid"></b><br>ইমেইলে কনফার্মেশন গেছে। পেমেন্ট যাচাই হলেই লেখা শুরু।</p></div></div></section>
+<footer>তেইশ টাকা &middot; ভালোবাসার একটা ছোট্ট প্রজেক্ট</footer>
+<script>
+const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);let S={bkash:'',nagad:''};
+fetch('/api/public?v=1').then(r=>r.json()).then(s=>{S=s;tot.textContent=bn(s.base+s.note);notice.textContent=s.notice;pn.textContent=s.bkash}).catch(()=>{});
+document.querySelectorAll('[name=pay]').forEach(r=>r.onchange=()=>pn.textContent=r.value=='bKash'?S.bkash:S.nagad);
+f.onsubmit=async e=>{e.preventDefault();err.textContent='';const d=Object.fromEntries(new FormData(f));d.anon=anon.checked;
+ for(const k of['recName','recAddr','recContact','message','email','wa','trxId'])if(!d[k]||!d[k].trim()){err.textContent='সব দরকারি ঘর পূরণ করো';return}
+ go.disabled=true;try{const r=await fetch('/api/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)}),j=await r.json();
+ if(!r.ok)throw Error(j.error);f.style.display='none';oid.textContent=j.id;done.style.display='block';done.scrollIntoView()}catch(x){err.textContent=x.message||'কিছু একটা ভুল হয়েছে, আবার চেষ্টা করো';go.disabled=false}};
+</script></body></html>

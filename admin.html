@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>ডাকঘর — অ্যাডমিন</title><link href="https://fonts.googleapis.com/css2?family=Atma:wght@500;700&family=Tiro+Bangla&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#FBE0D8;--p2:#fff;--red:#D8382F;--blue:#1F7A8C;--ink:#3A2A22}
+
+*{box-sizing:border-box}body{margin:0;font:16px/1.6 "Tiro Bangla",serif;background:var(--paper);color:var(--ink);padding:14px}
+body::before{content:"";position:fixed;inset:0;border:10px solid;border-image:repeating-linear-gradient(135deg,var(--red) 0 16px,transparent 16px 24px,var(--blue) 24px 40px,transparent 40px 48px) 10;pointer-events:none}
+main{max-width:980px;margin:auto;padding:6px}h1,h2{font:700 2rem Atma;color:var(--red);margin:6px 0}h2{font-size:1.5rem;color:var(--blue)}
+input,select,textarea,button{font:inherit;padding:8px;border:1.5px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:0}
+button{background:#FFC93C;color:#3B2318;border-color:#3B2318;cursor:pointer;font-weight:600}button.g{background:none;color:var(--ink);border-color:var(--ink)}
+#login{max-width:340px;margin:12vh auto;text-align:center;background:var(--p2);padding:24px;border:3px double var(--red)}#login input{width:100%;margin:6px 0}
+.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}.st{background:var(--p2);border:2px dashed var(--red);padding:10px;text-align:center}.st b{display:block;font:700 2rem Atma;color:var(--red)}
+.bars{display:flex;align-items:flex-end;gap:6px;height:90px;background:var(--p2);padding:8px;border:2px solid var(--ink)}.bars i{flex:1;background:var(--blue);min-height:2px;position:relative}.bars i span{position:absolute;top:-18px;left:0;right:0;text-align:center;font-size:12px;font-style:normal}
+.o{background:var(--p2);border:2px solid var(--ink);padding:12px;margin:12px 0}.o pre{white-space:pre-wrap;font:inherit;background:var(--paper);padding:10px;border-left:4px solid var(--blue);margin:8px 0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.badge{padding:2px 10px;background:var(--blue);color:#fff}.tabs button{margin-right:6px}
+.set label{display:block;margin-top:8px}.set input,.set textarea{width:100%}
+</style></head><body><main>
+<div id="login"><h1>ডাকঘর</h1><p>অ্যাডমিন লগইন</p><input id="u" placeholder="ID" autocomplete="username"><input id="p" type="password" placeholder="Password" autocomplete="current-password"><button id="lb" style="width:100%">ঢোকো</button><p id="le" style="color:var(--red)"></p></div>
+<div id="app" hidden>
+<div class="top"><h1>তেইশ টাকা — ড্যাশবোর্ড</h1><span><span id="me"></span> <button class="g" id="out">বের হও</button></span></div>
+<div class="stats" id="stats"></div><h2>গত ৭ দিনের ভিজিটর</h2><div class="bars" id="bars"></div>
+<div class="top" style="margin-top:20px"><h2>অর্ডার</h2><span class="tabs"><select id="flt"><option value="">সব</option><option>Pending</option><option>Paid</option><option>Written</option><option>Delivered</option><option>Cancelled</option></select> <button class="g" id="rf">রিফ্রেশ</button></span></div>
+<div id="list"></div>
+<h2>সেটিংস</h2><div class="set o"><label>bKash নম্বর<input id="sb"></label><label>Nagad নম্বর<input id="sn"></label><label>চিঠির দাম<input id="sbase" type="number"></label><label>নোটের দাম<input id="snote" type="number"></label><label>অর্ডারের নিচের নোটিশ<textarea id="snt"></textarea></label><p><button id="ss">সেভ করো</button> <span id="sm"></span></p></div>
+</div></main>
+<script>
+const $=id=>document.getElementById(id),bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);let T=localStorage.tk,D;
+const esc=v=>String(v||'').replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
+const api=async(a,b)=>{const r=await fetch('/api/admin?a='+a,{method:'POST',headers:{'Content-Type':'application/json','x-token':T||''},body:JSON.stringify(b||{})});const j=await r.json();if(r.status==401&&a!='login'){localStorage.removeItem('tk');location.reload()}return j};
+$('lb').onclick=async()=>{const j=await api('login',{u:u.value,p:p.value});if(j.token){T=j.token;localStorage.tk=T;load()}else le.textContent=j.error};
+$('out').onclick=()=>{localStorage.removeItem('tk');location.reload()};$('rf').onclick=load;$('flt').onchange=draw;
+async function load(){if(!T)return;D=await api('data');if(!D.orders)return;$('login').hidden=true;$('app').hidden=false;me.textContent=D.me;
+ const s=D.settings;sb.value=s.bkash;sn.value=s.nagad;sbase.value=s.base;snote.value=s.note;snt.value=s.notice;draw()}
+function draw(){const O=D.orders,td=new Date().toISOString().slice(0,10),paid=O.filter(o=>['Paid','Written','Delivered'].includes(o.status));
+ stats.innerHTML=[['আজকের অর্ডার',O.filter(o=>o.at.startsWith(td)).length],['মোট অর্ডার',O.length],['পেমেন্ট বাকি',O.filter(o=>o.status=='Pending').length],['আয় (টাকা)',paid.reduce((a,o)=>a+o.total,0)],['আজকের ভিজিটর',D.visits[td]||0],['মোট ভিজিটর',Object.values(D.visits).reduce((a,b)=>a+b,0)]].map(x=>`<div class="st"><b>${bn(x[1])}</b>${x[0]}</div>`).join('');
+ const days=[...Array(7)].map((_,i)=>new Date(Date.now()-(6-i)*864e5).toISOString().slice(0,10)),mx=Math.max(1,...days.map(d=>D.visits[d]||0));
+ bars.innerHTML=days.map(d=>`<i style="height:${(D.visits[d]||0)/mx*100}%" title="${d}"><span>${bn(D.visits[d]||0)}</span></i>`).join('');
+ list.innerHTML=O.filter(o=>!flt.value||o.status==flt.value).map(o=>`<div class="o"><div class="row"><b>${o.id}</b><span class="badge">${o.status}</span><span>${new Date(o.at).toLocaleString('bn-BD')}</span><span style="margin-left:auto">${o.pay}: <b>${esc(o.trxId)}</b> (${bn(o.total)}৳)</span></div>
+ <p><b>প্রাপক:</b> ${esc(o.recName)} &middot; ${esc(o.recAddr)} &middot; ${esc(o.recContact)}<br><b>প্রেরক:</b> ${o.anon?'<i>গোপন</i> ('+esc(o.senderName)+')':esc(o.senderName)} &middot; ${esc(o.email)} &middot; WA: ${esc(o.wa)}${o.extra?'<br><b>এক্সট্রা:</b> '+esc(o.extra):''}</p><pre>${esc(o.message)}</pre>
+ <div class="row"><select onchange="up('${o.id}',{status:this.value})">${['Pending','Paid','Written','Delivered','Cancelled'].map(s=>`<option ${s==o.status?'selected':''}>${s}</option>`).join('')}</select>
+ <input placeholder="নোট" value="${esc(o.adminNote)}" onchange="up('${o.id}',{adminNote:this.value})" style="flex:1"><button class="g" onclick="del('${o.id}')">মুছো</button></div></div>`).join('')||'<p>এখনো কোনো অর্ডার নেই। প্রথম চিঠির অপেক্ষায়।</p>'}
+async function up(id,b){await api('update',{id,...b});load()}
+async function del(id){if(confirm('অর্ডার মুছে ফেলবে?')){await api('delete',{id});load()}}
+$('ss').onclick=async()=>{await api('settings',{bkash:sb.value,nagad:sn.value,base:sbase.value,note:snote.value,notice:snt.value});sm.textContent='সেভ হয়েছে';load()};
+load();
+</script></body></html>
