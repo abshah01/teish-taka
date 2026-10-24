@@ -4,5 +4,7 @@ exports.r=async(...c)=>{const x=await fetch(U,{method:'POST',headers:{Authorizat
 const tok=(u,p)=>crypto.createHmac('sha256',process.env.SECRET||'change-me').update(u+':'+p).digest('hex');
 exports.tok=tok;
 exports.auth=q=>{const t=q.headers['x-token'];for(const a of (process.env.ADMINS||'').split(',')){const i=a.indexOf(':');const u=a.slice(0,i),p=a.slice(i+1);if(u&&t===tok(u,p))return u}return null};
-exports.DEF={bkash:'01552326923',nagad:'01342162933',base:23,note:2,notice:'অর্ডারের পর ২৪–৭২ ঘণ্টার মধ্যে চিঠি পৌঁছে যাবে।'};
-exports.settings=async()=>{try{return{...exports.DEF,...JSON.parse(await exports.r('GET','settings')||'{}')}}catch{return exports.DEF}};
+exports.DEF={fb:'',ig:'',wa:'',bkash:'01552326923',nagad:'01342162933',base:23,note:2,notice:'অর্ডারের পর ২৪–৭২ ঘণ্টার মধ্যে চিঠি পৌঁছে যাবে।'};
+const M0=()=>[{name:'bKash',number:exports.DEF.bkash,on:true},{name:'Nagad',number:exports.DEF.nagad,on:true},{name:'Upay',number:'',on:false},{name:'Rocket',number:'',on:false}];
+exports.settings=async()=>{try{const s=JSON.parse(await exports.r('GET','settings')||'{}');const m=s.methods||[{name:'bKash',number:s.bkash||exports.DEF.bkash,on:true},{name:'Nagad',number:s.nagad||exports.DEF.nagad,on:true},{name:'Upay',number:'',on:false},{name:'Rocket',number:'',on:false}];return{...exports.DEF,...s,methods:m}}catch{return{...exports.DEF,methods:M0()}}};
+exports.mail=async(to,subject,html)=>{const t=require('nodemailer').createTransport({service:'gmail',auth:{user:process.env.GMAIL_USER,pass:process.env.GMAIL_APP_PASS}});return t.sendMail({from:`তেইশ টাকা <${process.env.GMAIL_USER}>`,to,subject,html})};

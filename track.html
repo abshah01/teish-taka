@@ -1,0 +1,13 @@
+<!DOCTYPE html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>অর্ডার ট্র্যাক — তেইশ টাকা</title>
+<link href="https://fonts.googleapis.com/css2?family=Atma:wght@500;700&family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box}body{margin:0;font:18px/1.8 'Hind Siliguri',sans-serif;background:#FBE0D8;color:#3B2318;padding:20px}main{max-width:520px;margin:20px auto;background:#fff;border:3px solid #3B2318;border-radius:14px;padding:22px;box-shadow:6px 6px 0 #FFC93C}
+h1{font:700 2rem Atma;color:#D8382F;margin:0 0 8px}label{display:block;font-weight:600;margin-top:10px}input{width:100%;font:inherit;padding:9px 12px;border:2px solid #3B2318;border-radius:10px}
+button{margin-top:14px;background:#FFC93C;border:2px solid #3B2318;border-radius:999px;padding:8px 28px;font:700 1.1rem Atma;cursor:pointer;box-shadow:3px 3px 0 #3B2318}
+.st{display:flex;margin:18px 0 6px}.st div{flex:1;text-align:center;font-size:.85rem;border-top:6px solid #ddd;padding-top:6px;color:#999}.st .on{border-color:#D8382F;color:#3B2318;font-weight:600}
+#res{margin-top:14px;font-weight:600}a{color:#1F7A8C}</style></head><body><main><h1>অর্ডার ট্র্যাক করো</h1>
+<label>অর্ডার আইডি <small>(ইমেইলে পাওয়া)</small></label><input id="i" placeholder="T..."><label>অর্ডারের সময় দেওয়া ইমেইল</label><input id="e" type="email">
+<button id="b">দেখো</button><div id="res" role="status"></div><p><a href="/">← হোম পেজে ফিরে যাও</a></p></main>
+<script>const L=[['Pending','অপেক্ষায়'],['Paid','পেমেন্ট পেয়েছি'],['Written','লেখা হয়েছে'],['Delivered','পৌঁছে গেছে']];
+b.onclick=async()=>{res.textContent='...';try{const r=await fetch('/api/track?id='+encodeURIComponent(i.value)+'&email='+encodeURIComponent(e.value)),j=await r.json();if(!r.ok)throw Error(j.error);
+if(j.status=='Cancelled'){res.innerHTML='প্রাপক: '+j.recName.replace(/</g,'&lt;')+'<br>অর্ডার বাতিল হয়েছে।';return}
+const k=L.findIndex(x=>x[0]==j.status);res.innerHTML='প্রাপক: '+j.recName.replace(/</g,'&lt;')+'<div class="st">'+L.map((x,n)=>`<div class="${n<=k?'on':''}">${x[1]}</div>`).join('')+'</div>'}catch(x){res.textContent=x.message||'কিছু ভুল হয়েছে'}};</script></body></html>
