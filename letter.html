@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>চিঠি লেখাও — তেইশ টাকা</title>
+<meta name="description" content="ড্যাফোডিল ক্যাম্পাসে হাতে লেখা চিঠি। তোমার কথা আমি নিজের হাতে লিখে প্রিয় মানুষের হাতে পৌঁছে দিই, সঙ্গে ২ টাকার একটা নোট।">
+<meta property="og:type" content="website"><meta property="og:title" content="তেইশ টাকা — চিঠি, যা ভালবাসা বাড়ায়"><meta property="og:description" content="ড্যাফোডিল ক্যাম্পাসে হাতে লেখা চিঠি। সঙ্গে ২ টাকার একটা নোট।"><meta property="og:image" content="https://teish-taka-zquj.vercel.app/og.png"><meta property="og:url" content="https://teish-taka-zquj.vercel.app"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✉️</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Atma:wght@500;700&family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head><body><div class="top"><span>ড্যাফোডিল ক্যাম্পাসে হাতে লেখা চিঠি</span><span>হাতে হাতে ডেলিভারি</span><span>সঙ্গে ২ টাকার নোট</span><span>পৌঁছানোর প্রমাণ WhatsApp-এ</span></div><nav><span class="l"><a href="/">হোম</a><a href="/shop">দোকান</a><a href="/track">অর্ডার ট্র্যাক</a></span><a class="logo" href="/" style="text-decoration:none">তেইশ টাকা</a><a href="/shop#cart" class="cartb" aria-label="কার্ট">🛒<i id="cn">0</i></a></nav><div class="pg"><h1>চিঠি লেখাও ✉️</h1><p>২৩ টাকা চিঠির, ২ টাকা “তুমি আর আমি”র নোটের। শুধু চিঠির অর্ডারে ডেলিভারি চার্জ নেই।</p></div><section id="order"><div class="in"><p class="hint">দোকানের কোনো উপহারের সঙ্গে চিঠি পাঠাতে চাইলে <a href="/shop">দোকানে</a> গিয়ে কার্টে চিঠি যোগ করো।</p>
+<form id="f" novalidate>
+<fieldset><legend>প্রাপক</legend>
+<label>প্রাপকের নাম</label><input name="recName" required autocomplete="off">
+<label>ঠিকানা <small>(বিভাগ / হল / বিল্ডিং / রুম)</small></label><input name="recAddr" required>
+<label>প্রাপকের যোগাযোগ <small>(ফোন, ইমেইল, FB বা Insta ID)</small></label><input name="recContact" required></fieldset>
+<fieldset><legend>তোমার কথা</legend>
+<label>চিঠিতে যা লিখতে চাও</label><textarea name="message" required maxlength="6000" placeholder="প্রিয়..."></textarea><small id="wc"></small>
+<label>আরও কিছু যোগ করতে চাও? <small>(আলাদা চার্জ লাগবে, আমি জানিয়ে দেব)</small></label><input name="extra" placeholder="যেমন: শুকনো ফুল, ছোট ছবি"></fieldset>
+<fieldset><legend>প্রেরক (তুমি)</legend>
+<label>তোমার নাম</label><input name="senderName">
+<div class="chk"><input type="checkbox" id="anon" name="anon"><label for="anon">নাম গোপন রাখো</label></div>
+<label>তোমার ইমেইল <small>(কনফার্মেশন যাবে)</small></label><input type="email" name="email" required>
+<label>তোমার WhatsApp নম্বর <small>(পৌঁছানোর প্রমাণ যাবে)</small></label><input name="wa" required></fieldset>
+<div id="s1"><button class="btn" id="nx" type="button">পরের ধাপ</button><p id="e1" role="alert" style="color:var(--red);font-weight:600"></p></div>
+<div id="smy" hidden><div class="card" id="sumc"></div><p><button class="btn" id="ed" type="button" style="background:#fff">চিঠি বদলাব</button> <button class="btn" id="ok2" type="button">ঠিক আছে, পেমেন্টে যাই</button></p></div>
+<div id="s2" hidden><fieldset><legend>পেমেন্ট</legend>
+<div class="amt">মোট <span id="tot">২৫</span> টাকা</div>
+<div class="pay" id="methods"></div>
+<p>এই নম্বরে Send Money করো: <span class="num notranslate" translate="no" id="pn"></span></p>
+<label>TrxID</label><input name="trxId" required autocomplete="off"></fieldset>
+<div class="chk rule"><input type="checkbox" id="agree"><label for="agree">চিঠিতে অপমান, হুমকি, হয়রানি বা বেআইনি কিছু লেখা যাবে না। এমন অর্ডার আমি বাতিল করব আর টাকা ফেরত দেব। আমি এটা মেনে নিচ্ছি।</label></div><input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+<p id="notice"></p><p id="err" role="alert"></p><button class="btn" id="go">চিঠি পাঠাও</button></div></form>
+<div id="done" role="status"><h2>চিঠি রওনা দিল</h2><p>অর্ডার আইডি <b id="oid"></b><br>ইমেইলে কনফার্মেশন গেছে। পেমেন্ট যাচাই হলেই লেখা শুরু।<br><a href="/track">অর্ডারের অবস্থা দেখো</a></p></div></div></section>
+<footer><div id="soc"></div><a href="/privacy">গোপনীয়তা ও নিয়ম</a><br>তেইশ টাকা &middot; ভালোবাসার একটা ছোট্ট প্রজেক্ট</footer>
+<script>
+const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);let S={methods:[]};const esc=v=>String(v||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+try{const c=JSON.parse(localStorage.cart||'{}');cn.textContent=bn(Object.values(c).reduce((a,b)=>a+b,0))}catch{}
+fetch('/api/public').then(r=>r.json()).then(s=>{S=s;upd();notice.textContent=s.notice;if(s.open===false){go.disabled=true;go.textContent='অর্ডার এখন বন্ধ';nx.disabled=true;nx.textContent='অর্ডার এখন বন্ধ';e1.textContent=s.closedMsg||'এখন অর্ডার নেওয়া বন্ধ আছে। একটু পরে আবার দেখো।';notice.textContent=s.closedMsg||'এখন অর্ডার নেওয়া বন্ধ আছে। একটু পরে আবার দেখো।'}let k=0;methods.innerHTML=s.methods.map(m=>m.on&&m.number?`<label><input type="radio" name="pay" value="${esc(m.name)}" ${k++?'':'checked'}> ${esc(m.name)}</label>`:`<label class="soon"><input type="radio" disabled> ${esc(m.name)}</label>`).join('');setNum();
+ soc.innerHTML=[['Facebook',s.fb],['Instagram',s.ig],['WhatsApp',s.wa&&/^\+?[\d\s-]{6,}$/.test(s.wa)?'https://wa.me/'+s.wa.replace(/\D/g,''):s.wa]].filter(x=>/^https?:\/\//.test(x[1]||'')).map(x=>`<a href="${esc(x[1])}" target="_blank" rel="noopener">${x[0]}</a>`).join('');}).catch(()=>{});
+function calc(){const w=f.message.value.trim().split(/\s+/).filter(Boolean).length,a=S.freeWords||150,bl=S.blockWords||100,pr=S.blockPrice==null?10:S.blockPrice,x=w>a?Math.ceil((w-a)/bl)*pr:0;return{w,a,x,t:(S.base||23)+(S.note||2)+x}}
+function upd(){const c=calc();tot.textContent=bn(c.t);wc.textContent=c.w?bn(c.w)+' শব্দ'+(c.x?' · বাড়তি '+bn(c.x)+' টাকা':''):'';if(!s2.hidden||!smy.hidden){s2.hidden=true;smy.hidden=true;nx.hidden=false}}
+nx.onclick=()=>{e1.textContent='';for(const k of['recName','recAddr','recContact','message','email','wa'])if(!f[k].value.trim()){e1.textContent='সব দরকারি ঘর পূরণ করো';f[k].focus();return}
+ const c=calc();sumc.innerHTML='<b>তোমার চিঠি '+bn(c.w)+' শব্দের</b>'+(c.x?bn(c.a)+' শব্দের পর বাড়তি '+bn(c.x)+' টাকা যোগ হয়েছে।':bn(c.a)+' শব্দের মধ্যে, তাই বাড়তি খরচ নেই।')+'<br><b>মোট '+bn(c.t)+' টাকা</b><small>চিঠি বাড়ালে বা কমালে টাকাও সেই অনুযায়ী বদলাবে। বদলাতে চাইলে নিচের "চিঠি বদলাব" চাপো।</small>';smy.hidden=false;nx.hidden=true;smy.scrollIntoView({behavior:'smooth',block:'center'})};
+ed.onclick=()=>{smy.hidden=true;s2.hidden=true;nx.hidden=false;f.message.focus()};
+ok2.onclick=()=>{smy.hidden=true;s2.hidden=false;s2.scrollIntoView({behavior:'smooth'})};
+f.message.addEventListener('input',upd);
+function setNum(){const c=document.querySelector('[name=pay]:checked'),m=c&&S.methods.find(m=>m.name==c.value);pn.textContent=m?m.number:''}
+f.addEventListener('change',setNum);
+f.onsubmit=async e=>{e.preventDefault();if(s2.hidden){nx.click();return}err.textContent='';const d=Object.fromEntries(new FormData(f));d.anon=anon.checked;d.agree=agree.checked;d.src=new URLSearchParams(location.search).get('src')||(document.referrer?new URL(document.referrer).hostname:'direct');if(!d.agree){err.textContent='চিঠি লেখার নিয়মে টিক দাও';return}
+ for(const k of['recName','recAddr','recContact','message','email','wa','trxId'])if(!d[k]||!d[k].trim()){err.textContent='সব দরকারি ঘর পূরণ করো';return}
+ go.disabled=true;try{const r=await fetch('/api/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)}),j=await r.json();
+ if(!r.ok)throw Error(j.error);f.style.display='none';oid.textContent=j.id;done.style.display='block';done.scrollIntoView()}catch(x){err.textContent=x.message||'কিছু একটা ভুল হয়েছে, আবার চেষ্টা করো';go.disabled=false}};
+</script></body></html>

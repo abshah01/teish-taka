@@ -5,8 +5,11 @@ const sig=(u,p,t)=>crypto.createHmac('sha256',process.env.SECRET||'change-me').u
 const tok=(u,p)=>{const t=Date.now();return t+'.'+sig(u,p,t)};
 exports.tok=tok;
 exports.auth=q=>{const [t,h]=String(q.headers['x-token']||'').split('.');if(!t||!h||Date.now()-t>7776e6)return null;for(const a of (process.env.ADMINS||'').split(',')){const i=a.indexOf(':'),u=a.slice(0,i),p=a.slice(i+1);if(u&&h===sig(u,p,t)){q._a=[u,p];return u}}return null};
-exports.DEF={fb:'',ig:'',wa:'',bkash:'01552326923',nagad:'01342162933',base:23,note:2,freeWords:150,blockWords:100,blockPrice:10,notice:'অর্ডারের পর ২৪–৭২ ঘণ্টার মধ্যে চিঠি পৌঁছে যাবে।'};
+exports.DEF={fb:'',ig:'',wa:'',bkash:'01552326923',nagad:'01342162933',base:23,note:2,freeWords:150,blockWords:100,blockPrice:10,delivery:20,halfMin:300,shopOpen:true,notice:'অর্ডারের পর ২৪–৭২ ঘণ্টার মধ্যে চিঠি পৌঁছে যাবে।'};
 const M0=()=>[{name:'bKash',number:exports.DEF.bkash,on:true},{name:'Nagad',number:exports.DEF.nagad,on:true},{name:'Upay',number:'',on:false},{name:'Rocket',number:'',on:false}];
 exports.settings=async()=>{try{const s=JSON.parse(await exports.r('GET','settings')||'{}');const m=s.methods||[{name:'bKash',number:s.bkash||exports.DEF.bkash,on:true},{name:'Nagad',number:s.nagad||exports.DEF.nagad,on:true},{name:'Upay',number:'',on:false},{name:'Rocket',number:'',on:false}];return{...exports.DEF,...s,methods:m}}catch{return{...exports.DEF,methods:M0()}}};
 exports.mail=async(to,subject,html)=>{const t=require('nodemailer').createTransport({service:'gmail',auth:{user:process.env.GMAIL_USER,pass:process.env.GMAIL_APP_PASS}});return t.sendMail({from:`তেইশ টাকা <${process.env.GMAIL_USER}>`,to,subject,html})};
 exports.rt=id=>crypto.createHmac('sha256',process.env.SECRET||'change-me').update('rv'+id).digest('hex').slice(0,16);
+
+exports.letterPrice=(msg,st)=>{const wc=String(msg||'').trim().split(/\s+/).filter(Boolean).length,xc=wc>st.freeWords?Math.ceil((wc-st.freeWords)/st.blockWords)*st.blockPrice:0;return{wc,xc,total:st.base+st.note+xc}};
+exports.recalc=(o,st)=>{const items=(o.lines||[]).filter(l=>l.ok!==false).reduce((a,l)=>a+l.price*l.qty,0),letter=o.letter&&o.letter.off!==true?(o.letterTotal||0):0,delivery=items>0?st.delivery:0;o.itemsTotal=items;o.delivery=delivery;o.total=items+letter+delivery;const bal=o.total-(o.paidOnline||0);o.due=bal>0?bal:0;o.refundDue=bal<0?-bal:0;return o};

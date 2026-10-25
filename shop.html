@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>উপহারের দোকান — তেইশ টাকা</title>
+<meta name="description" content="ড্যাফোডিল ক্যাম্পাসে হাতে লেখা চিঠি। তোমার কথা আমি নিজের হাতে লিখে প্রিয় মানুষের হাতে পৌঁছে দিই, সঙ্গে ২ টাকার একটা নোট।">
+<meta property="og:type" content="website"><meta property="og:title" content="তেইশ টাকা — চিঠি, যা ভালবাসা বাড়ায়"><meta property="og:description" content="ড্যাফোডিল ক্যাম্পাসে হাতে লেখা চিঠি। সঙ্গে ২ টাকার একটা নোট।"><meta property="og:image" content="https://teish-taka-zquj.vercel.app/og.png"><meta property="og:url" content="https://teish-taka-zquj.vercel.app"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✉️</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Atma:wght@500;700&family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/style.css">
+</head><body><div class="top"><span>ড্যাফোডিল ক্যাম্পাসে হাতে লেখা চিঠি</span><span>হাতে হাতে ডেলিভারি</span><span>সঙ্গে ২ টাকার নোট</span><span>পৌঁছানোর প্রমাণ WhatsApp-এ</span></div><nav><span class="l"><a href="/">হোম</a><a href="/letter">চিঠি লেখাও</a><a href="/track">অর্ডার ট্র্যাক</a></span><a class="logo" href="/" style="text-decoration:none">তেইশ টাকা</a><a href="/shop#cart" class="cartb" aria-label="কার্ট">🛒<i id="cn">0</i></a></nav><div class="pg"><h1>উপহারের দোকান 🎁</h1><p>প্রিয় মানুষের জন্য ছোট ছোট উপহার। ডেলিভারি চার্জ প্রতি অর্ডারে একবারই।</p></div>
+<section><div class="in" style="max-width:900px"><div id="closed" class="card" hidden></div><div class="pgrid" id="pg"><p>লোড হচ্ছে...</p></div></div></section>
+<section class="pk" id="cart"><div class="in"><h2>তোমার কার্ট</h2><div id="cl"><p>কার্ট খালি। উপরে থেকে জিনিস বেছে নাও।</p></div><div class="bill" id="bill" hidden></div>
+<form id="f" novalidate hidden>
+<fieldset><legend>তোমার তথ্য</legend>
+<label>তোমার নাম</label><input name="name" required><label>ফোন নম্বর</label><input name="phone" type="tel" required><label>ইমেইল <small>(কনফার্মেশন যাবে)</small></label><input name="email" type="email" required>
+<label>ডেলিভারির ঠিকানা <small>(বিভাগ / হল / বিল্ডিং / রুম)</small></label><input name="addr" required></fieldset>
+<div class="chk"><input type="checkbox" id="lon"><label for="lon">সঙ্গে হাতে লেখা চিঠিও পাঠাতে চাই <small id="lpr"></small></label></div>
+<div id="lbox" hidden><fieldset><legend>চিঠি</legend>
+<label>প্রাপকের নাম</label><input name="recName"><label>প্রাপকের ঠিকানা</label><input name="recAddr"><label>প্রাপকের যোগাযোগ</label><input name="recContact">
+<label>চিঠিতে যা লিখতে চাও</label><textarea name="message" maxlength="6000" placeholder="প্রিয়..."></textarea><small id="wc"></small>
+<label>এক্সট্রা কিছু?</label><input name="extra"><label>তোমার নাম (প্রেরক)</label><input name="senderName"><div class="chk"><input type="checkbox" id="anon"><label for="anon">নাম গোপন রাখো</label></div></fieldset></div>
+<fieldset><legend>পেমেন্ট</legend><div class="pay one" id="modes"></div>
+<div class="amt">এখন পাঠাতে হবে <span id="now">০</span> টাকা</div><p class="hint" id="duen"></p>
+<div class="pay" id="methods"></div><p>এই নম্বরে Send Money করো: <span class="num notranslate" translate="no" id="pn"></span></p>
+<label>TrxID</label><input name="trxId" required autocomplete="off"></fieldset>
+<div class="chk rule"><input type="checkbox" id="agree"><label for="agree">আমার দেওয়া তথ্য ঠিক। চিঠি থাকলে তাতে অপমান, হুমকি বা বেআইনি কিছু নেই। স্টক শেষ হলে আমাকে ফোন করা হবে, চাইলে অন্য জিনিস নেব, নইলে ওই জিনিসের টাকা বিল থেকে কমবে।</label></div>
+<input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+<p id="notice"></p><p id="err" role="alert"></p><button class="btn" id="go">অর্ডার পাঠাও</button></form>
+<div id="done" role="status"><h2>অর্ডার রওনা দিল</h2><p>অর্ডার আইডি <b id="oid"></b><br><span id="dmsg"></span><br>ইমেইলে কনফার্মেশন গেছে।<br><a href="/track">অর্ডারের অবস্থা দেখো</a></p></div></div></section>
+<div class="sbar" id="sb" hidden><span id="sbt"></span><a href="#cart">কার্ট দেখো</a></div>
+<footer><div id="soc"></div><a href="/privacy">গোপনীয়তা ও নিয়ম</a><br>তেইশ টাকা &middot; ভালোবাসার একটা ছোট্ট প্রজেক্ট</footer>
+<script>
+const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]),esc=v=>String(v||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+let S={items:[],methods:[]},C={};try{C=JSON.parse(localStorage.cart||'{}')}catch{}
+const save=()=>{try{localStorage.cart=JSON.stringify(C)}catch{}};
+const P=id=>S.items.find(p=>p.id==id);
+function lines(){return Object.entries(C).map(([id,q])=>({p:P(id),q})).filter(x=>x.p&&x.p.left>0).map(x=>({...x,q:Math.min(x.q,x.p.left)}))}
+function letterT(){const w=f.message.value.trim().split(/\s+/).filter(Boolean).length,a=S.freeWords||150,bl=S.blockWords||100,pr=S.blockPrice==null?10:S.blockPrice,x=w>a?Math.ceil((w-a)/bl)*pr:0;return{w,x,t:(S.base||23)+(S.note||2)+x}}
+function tot(){const L=lines(),it=L.reduce((a,x)=>a+x.p.price*x.q,0),lt=lon.checked?letterT().t:0,dl=it>0?(S.delivery||0):0;return{L,it,lt,dl,t:it+lt+dl}}
+function mode(){const m=document.querySelector('[name=mode]:checked');return m?m.value:'full'}
+function draw(){const T=tot(),n=T.L.reduce((a,x)=>a+x.q,0);
+ pg.innerHTML=S.items.map(p=>{const q=C[p.id]||0,out=p.left<1;return `<div class="pc ${out?'out':''}">${p.img?`<img src="/api/shop?img=${p.id}&v=${p.v}" alt="${esc(p.name)}" loading="lazy">`:'<div class="ph">🎁</div>'}<div class="pb"><b>${esc(p.name)}</b><span class="pr">${bn(p.price)} টাকা</span>${p.desc?`<small>${esc(p.desc)}</small>`:''}${out?'<span class="tag">স্টক শেষ</span>':q?`<span class="qty"><button onclick="ch('${p.id}',-1)" aria-label="কমাও">−</button><span>${bn(q)}</span><button onclick="ch('${p.id}',1)" aria-label="বাড়াও">+</button></span>`:`<button class="btn" onclick="ch('${p.id}',1)">কার্টে নাও</button>`}</div></div>`}).join('')||'<p>দোকানে এখন কিছু নেই। একটু পরে দেখো।</p>';
+ cl.innerHTML=T.L.length?T.L.map(x=>`<div class="cl"><div class="n"><b>${esc(x.p.name)}</b><br>${bn(x.p.price)} × ${bn(x.q)}</div><span class="qty" style="margin:0"><button onclick="ch('${x.p.id}',-1)">−</button><span>${bn(x.q)}</span><button onclick="ch('${x.p.id}',1)">+</button></span><b>${bn(x.p.price*x.q)}৳</b><button class="x" onclick="rm('${x.p.id}')" aria-label="বাদ দাও">✕</button></div>`).join(''):'<p>কার্ট খালি। উপরে থেকে জিনিস বেছে নাও।</p>';
+ bill.hidden=f.hidden=!T.L.length;
+ bill.innerHTML=`<div><span>জিনিসের দাম</span><span>${bn(T.it)}৳</span></div>${T.lt?`<div><span>হাতে লেখা চিঠি</span><span>${bn(T.lt)}৳</span></div>`:''}<div><span>ডেলিভারি চার্জ (একবারই)</span><span>${bn(T.dl)}৳</span></div><div class="t"><span>মোট</span><span>${bn(T.t)}৳</span></div>`;
+ const half=T.t>=(S.halfMin||300),cur=mode();
+ modes.innerHTML=`<label><input type="radio" name="mode" value="full" ${cur!='half'||!half?'checked':''}> পুরো টাকা এখন দেবো</label>`+(half?`<label><input type="radio" name="mode" value="half" ${cur=='half'?'checked':''}> অর্ধেক এখন, বাকি অর্ধেক ডেলিভারির সময় ডেলিভারি ম্যানকে দেবো</label>`:`<p class="hint">${bn(S.halfMin||300)} টাকা বা তার বেশি হলে অর্ধেক টাকা পরে দেওয়ার অপশন আসবে।</p>`);
+ const now=mode()=='half'&&half?Math.ceil(T.t/2):T.t;now_.textContent=bn(now);duen.textContent=now<T.t?'ডেলিভারির সময় ডেলিভারি ম্যানকে দিতে হবে '+bn(T.t-now)+' টাকা।':'';
+ lpr.textContent='('+bn(letterT().t)+' টাকা)';wc.textContent=lon.checked&&f.message.value?bn(letterT().w)+' শব্দ':'';
+ sb.hidden=!n;sbt.textContent=bn(n)+' টি জিনিস · '+bn(T.t)+' টাকা';
+ try{cn.textContent=bn(n)}catch{}}
+const now_=document.getElementById('now');
+function ch(id,d){const p=P(id),q=Math.max(0,Math.min(p.left,20,(C[id]||0)+d));if(q)C[id]=q;else delete C[id];save();draw()}
+function rm(id){delete C[id];save();draw()}
+lon.onchange=()=>{lbox.hidden=!lon.checked;draw()};f.message.addEventListener('input',draw);f.addEventListener('change',e=>{if(e.target.name=='mode')draw();setNum()});
+function setNum(){const c=document.querySelector('[name=pay]:checked'),m=c&&S.methods.find(m=>m.name==c.value);pn.textContent=m?m.number:''}
+fetch('/api/shop').then(r=>r.json()).then(s=>{S=s;
+ for(const id of Object.keys(C))if(!P(id))delete C[id];save();
+ let k=0;methods.innerHTML=s.methods.map(m=>m.on&&m.number?`<label><input type="radio" name="pay" value="${esc(m.name)}" ${k++?'':'checked'}> ${esc(m.name)}</label>`:'').join('');setNum();notice.textContent=s.notice||'';
+ if(s.shopOpen===false){closed.hidden=false;closed.textContent='দোকান এখন বন্ধ আছে। একটু পরে আবার দেখো।';go.disabled=true}
+ if(s.open===false){lon.disabled=true}
+ draw();if(location.hash=='#cart')cart.scrollIntoView()}).catch(()=>{pg.innerHTML='<p>লোড হয়নি। আবার চেষ্টা করো।</p>'});
+f.onsubmit=async e=>{e.preventDefault();err.textContent='';const T=tot(),d=Object.fromEntries(new FormData(f));
+ for(const k of['name','phone','email','addr','trxId'])if(!d[k]||!d[k].trim()){err.textContent='সব দরকারি ঘর পূরণ করো';return}
+ if(lon.checked)for(const k of['recName','recAddr','recContact','message'])if(!d[k]||!d[k].trim()){err.textContent='চিঠির সব ঘর পূরণ করো';return}
+ if(!agree.checked){err.textContent='নিচের নিয়মে টিক দাও';return}
+ const body={name:d.name,phone:d.phone,email:d.email,addr:d.addr,trxId:d.trxId,pay:d.pay,mode:mode(),website:d.website,agree:true,src:new URLSearchParams(location.search).get('src')||'shop',cart:T.L.map(x=>({pid:x.p.id,qty:x.q})),letterOn:lon.checked,letter:lon.checked?{recName:d.recName,recAddr:d.recAddr,recContact:d.recContact,message:d.message,extra:d.extra,senderName:d.senderName,anon:anon.checked}:null};
+ go.disabled=true;try{const r=await fetch('/api/shop',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}),j=await r.json();if(!r.ok)throw Error(j.error);
+  C={};save();draw();f.style.display='none';cl.hidden=bill.hidden=true;oid.textContent=j.id;dmsg.textContent=j.due?'ডেলিভারির সময় ডেলিভারি ম্যানকে দিতে হবে '+bn(j.due)+' টাকা।':'';done.style.display='block';done.scrollIntoView()}catch(x){err.textContent=x.message||'কিছু একটা ভুল হয়েছে, আবার চেষ্টা করো';go.disabled=false}};
+</script></body></html>
