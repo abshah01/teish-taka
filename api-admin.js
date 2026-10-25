@@ -9,7 +9,7 @@ module.exports=async(q,s)=>{
   const h=await r('HGETALL','orders')||[],orders=[];for(let i=1;i<h.length;i+=2)orders.push(JSON.parse(h[i]));
   orders.sort((x,y)=>y.at.localeCompare(x.at));
   const v=await r('HGETALL','visits')||[],visits={};for(let i=0;i<v.length;i+=2)visits[v[i]]=+v[i+1];
-  return s.json({orders,visits,settings:await settings(),me});
+  return s.json({tk:tok(q._a[0],q._a[1]),orders,visits,settings:await settings(),me});
  }
  if(a==='update'){const o=JSON.parse(await r('HGET','orders',b.id)),old=o.status;if(b.status)o.status=b.status;if(b.f)for(const k of['recName','recAddr','recContact','email','wa','message','extra'])if(typeof b.f[k]==='string')o[k]=b.f[k].slice(0,6000);
   if(b.adminNote!==undefined)o.adminNote=String(b.adminNote).slice(0,1000);await r('HSET','orders',b.id,JSON.stringify(o));

@@ -16,7 +16,7 @@ button{background:#FFC93C;color:#3B2318;border-color:#3B2318;cursor:pointer;font
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.badge{padding:2px 10px;background:var(--blue);color:#fff}.tabs button{margin-right:6px}
 .set input[type=checkbox]{width:auto}.row label{display:flex;gap:4px;margin:0}.set label{display:block;margin-top:8px}.set input,.set textarea{width:100%}
 #tst{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#3B2318;color:#fff;padding:8px 16px;display:none;z-index:99}</style></head><body><main>
-<div id="login"><h1>ডাকঘর</h1><p>অ্যাডমিন লগইন</p><input id="u" placeholder="ID" autocomplete="username"><input id="p" type="password" placeholder="Password" autocomplete="current-password"><button id="lb" style="width:100%">ঢোকো</button><p id="le" style="color:var(--red)"></p></div>
+<div id="login"><h1>ডাকঘর</h1><p>অ্যাডমিন লগইন</p><input id="u" placeholder="ID" autocomplete="username"><input id="p" type="password" placeholder="Password" autocomplete="current-password"><label style="display:block;text-align:left;margin:4px 0"><input type="checkbox" id="rem" checked style="width:auto"> এই ডিভাইসে মনে রাখো</label><button id="lb" style="width:100%">ঢোকো</button><p id="le" style="color:var(--red)"></p></div>
 <div id="app" hidden>
 <div class="top"><h1>তেইশ টাকা — ড্যাশবোর্ড</h1><span><span id="me"></span> <button class="g" id="out">বের হও</button></span></div>
 <div class="stats" id="stats"></div><h2>গত ৭ দিনের ভিজিটর</h2><div class="bars" id="bars"></div>
@@ -29,12 +29,12 @@ button{background:#FFC93C;color:#3B2318;border-color:#3B2318;cursor:pointer;font
 https://www.instagram.com/p/..."></textarea></label><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="sopen" style="width:auto"> অর্ডার নেওয়া চালু আছে</label><label>অর্ডার বন্ধ থাকলে যা দেখাবে<input id="sclosed"></label><label>অর্ডারের নিচের নোটিশ<textarea id="snt"></textarea></label><p><button id="ss">সেভ করো</button> <span id="sm"></span></p></div>
 </div></main><div id="tst"></div>
 <script>
-const $=id=>document.getElementById(id),bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);let T=localStorage.tk,D;
+const $=id=>document.getElementById(id),bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);let T=localStorage.tk||sessionStorage.tk,D;
 const esc=v=>String(v||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
-const api=async(a,b)=>{const r=await fetch('/api/admin?a='+a,{method:'POST',headers:{'Content-Type':'application/json','x-token':T||''},body:JSON.stringify(b||{})});const j=await r.json();if(r.status==401&&a!='login'){localStorage.removeItem('tk');location.reload()}return j};
-$('lb').onclick=async()=>{const j=await api('login',{u:u.value,p:p.value});if(j.token){T=j.token;localStorage.tk=T;load().then(lb)}else le.textContent=j.error};
-$('out').onclick=()=>{localStorage.removeItem('tk');location.reload()};$('rf').onclick=()=>{load();lb()};$('flt').onchange=draw;$('qs').oninput=draw;
-async function load(){if(!T)return;D=await api('data');if(!D.orders)return;$('login').hidden=true;$('app').hidden=false;me.textContent=D.me;
+const api=async(a,b)=>{const r=await fetch('/api/admin?a='+a,{method:'POST',headers:{'Content-Type':'application/json','x-token':T||''},body:JSON.stringify(b||{})});const j=await r.json();if(r.status==401&&a!='login'){localStorage.removeItem('tk');sessionStorage.removeItem('tk');location.reload()}return j};
+$('lb').onclick=async()=>{const j=await api('login',{u:u.value,p:p.value});if(j.token){T=j.token;(rem.checked?localStorage:sessionStorage).tk=T;load().then(lb)}else le.textContent=j.error};
+$('out').onclick=()=>{localStorage.removeItem('tk');sessionStorage.removeItem('tk');location.reload()};$('rf').onclick=()=>{load();lb()};$('flt').onchange=draw;$('qs').oninput=draw;
+async function load(){if(!T)return;D=await api('data');if(!D.orders)return;if(D.tk){T=D.tk;(localStorage.tk?localStorage:sessionStorage).tk=T}$('login').hidden=true;$('app').hidden=false;me.textContent=D.me;
  const s=D.settings;M=s.methods;rm();spost.value=s.posts||'';sopen.checked=s.open!==false;sfree.value=s.freeWords||150;sblock.value=s.blockWords||100;sprice.value=s.blockPrice==null?10:s.blockPrice;sclosed.value=s.closedMsg||'';sfb.value=s.fb||'';sig.value=s.ig||'';swa.value=s.wa||'';sbase.value=s.base;snote.value=s.note;snt.value=s.notice;draw()}
 function draw(){const O=D.orders,td=new Date().toISOString().slice(0,10),paid=O.filter(o=>['Paid','Written','Delivered'].includes(o.status));
  stats.innerHTML=[['আজকের অর্ডার',O.filter(o=>o.at.startsWith(td)).length],['মোট অর্ডার',O.length],['পেমেন্ট বাকি',O.filter(o=>o.status=='Pending').length],['আয় (টাকা)',paid.reduce((a,o)=>a+o.total,0)],['আজকের ভিজিটর',D.visits[td]||0],['মোট ভিজিটর',Object.values(D.visits).reduce((a,b)=>a+b,0)]].map(x=>`<div class="st"><b>${bn(x[1])}</b>${x[0]}</div>`).join('');

@@ -4,7 +4,7 @@ exports.r=async(...c)=>{const x=await fetch(U,{method:'POST',headers:{Authorizat
 const sig=(u,p,t)=>crypto.createHmac('sha256',process.env.SECRET||'change-me').update(u+':'+p+':'+t).digest('hex');
 const tok=(u,p)=>{const t=Date.now();return t+'.'+sig(u,p,t)};
 exports.tok=tok;
-exports.auth=q=>{const [t,h]=String(q.headers['x-token']||'').split('.');if(!t||!h||Date.now()-t>6048e5)return null;for(const a of (process.env.ADMINS||'').split(',')){const i=a.indexOf(':'),u=a.slice(0,i),p=a.slice(i+1);if(u&&h===sig(u,p,t))return u}return null};
+exports.auth=q=>{const [t,h]=String(q.headers['x-token']||'').split('.');if(!t||!h||Date.now()-t>7776e6)return null;for(const a of (process.env.ADMINS||'').split(',')){const i=a.indexOf(':'),u=a.slice(0,i),p=a.slice(i+1);if(u&&h===sig(u,p,t)){q._a=[u,p];return u}}return null};
 exports.DEF={fb:'',ig:'',wa:'',bkash:'01552326923',nagad:'01342162933',base:23,note:2,freeWords:150,blockWords:100,blockPrice:10,notice:'অর্ডারের পর ২৪–৭২ ঘণ্টার মধ্যে চিঠি পৌঁছে যাবে।'};
 const M0=()=>[{name:'bKash',number:exports.DEF.bkash,on:true},{name:'Nagad',number:exports.DEF.nagad,on:true},{name:'Upay',number:'',on:false},{name:'Rocket',number:'',on:false}];
 exports.settings=async()=>{try{const s=JSON.parse(await exports.r('GET','settings')||'{}');const m=s.methods||[{name:'bKash',number:s.bkash||exports.DEF.bkash,on:true},{name:'Nagad',number:s.nagad||exports.DEF.nagad,on:true},{name:'Upay',number:'',on:false},{name:'Rocket',number:'',on:false}];return{...exports.DEF,...s,methods:m}}catch{return{...exports.DEF,methods:M0()}}};
