@@ -1,0 +1,17 @@
+<!DOCTYPE html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>রিভিউ — তেইশ টাকা</title>
+<link href="https://fonts.googleapis.com/css2?family=Atma:wght@500;700&family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box}body{margin:0;font:18px/1.8 'Hind Siliguri',sans-serif;background:#FBE0D8;color:#3B2318;padding:20px}main{max-width:520px;margin:6vh auto;background:#fff;border:3px solid #3B2318;border-radius:16px;box-shadow:6px 6px 0 #FFC93C;padding:24px}
+h1{font:700 2rem Atma;margin:0 0 6px;color:#D8382F}label{display:block;font-weight:600;margin-top:12px}textarea,input[type=text]{width:100%;font:inherit;padding:9px 12px;border:2px solid #3B2318;border-radius:10px}textarea{min-height:110px}
+.st{display:flex;gap:6px;font-size:2.2rem;cursor:pointer;user-select:none}.st span{color:#ccc}.st span.on{color:#F5B800}.btn{background:#FFC93C;border:2px solid #3B2318;border-radius:999px;padding:10px 28px;font:700 1.1rem Atma;cursor:pointer;box-shadow:3px 3px 0 #3B2318;margin-top:16px}#m{color:#D8382F;font-weight:600}</style></head><body><main>
+<div id="f"><h1>চিঠিটা কেমন লাগল?</h1><p>দু-এক লাইনে জানালেই হবে। আমি দেখে অনুমোদন দিলে এটা ওয়েবসাইটে দেখাবে।</p>
+<div class="st" id="st" role="radiogroup" aria-label="রেটিং"></div>
+<label>তোমার কথা</label><textarea id="tx" maxlength="400"></textarea>
+<label>নাম (ওয়েবসাইটে যেটা দেখাবে)</label><input type="text" id="nm" maxlength="40">
+<label style="font-weight:400"><input type="checkbox" id="an"> নাম গোপন রাখো</label><p id="m"></p><button class="btn" id="go">পাঠাও</button></div>
+<div id="ok" hidden><h1>ধন্যবাদ</h1><p>তোমার কথাটা পেয়েছি।</p></div></main>
+<script>
+const P=new URLSearchParams(location.search);let R=5;const st=document.getElementById('st');
+function d(){st.innerHTML=[1,2,3,4,5].map(i=>`<span class="${i<=R?'on':''}" data-i="${i}" role="radio" aria-checked="${i==R}">★</span>`).join('')}d();
+st.onclick=e=>{if(e.target.dataset.i){R=+e.target.dataset.i;d()}};
+go.onclick=async()=>{m.textContent='';go.disabled=true;try{const r=await fetch('/api/review',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:P.get('id'),t:P.get('t'),rating:R,text:tx.value,name:nm.value,anon:an.checked})}),j=await r.json();if(!r.ok)throw Error(j.error);f.hidden=true;ok.hidden=false}catch(e){m.textContent=e.message||'আবার চেষ্টা করো';go.disabled=false}};
+</script></body></html>

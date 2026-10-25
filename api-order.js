@@ -3,13 +3,19 @@ const c=v=>String(v||'').slice(0,3000),esc=v=>c(v).replace(/[&<>]/g,m=>({'&':'&a
 module.exports=async(q,s)=>{
  if(q.method!=='POST')return s.status(405).end();
  const b=q.body||{};
+ if(b.website)return s.json({ok:true,id:'T0'});
+ const st0=await settings();if(st0.open===false)return s.status(403).json({error:st0.closedMsg||'এখন অর্ডার নেওয়া বন্ধ আছে। একটু পরে আবার চেষ্টা করো।'});
+ if(!b.agree)return s.status(400).json({error:'চিঠি লেখার নিয়মে সম্মতি দিতে হবে'});
+ try{const ip=String(q.headers['x-forwarded-for']||'x').split(',')[0].trim(),k='rl:'+ip,n=await r('INCR',k);if(n==1)await r('EXPIRE',k,3600);if(n>8)return s.status(429).json({error:'অনেকবার চেষ্টা হয়েছে। এক ঘণ্টা পরে আবার চেষ্টা করো।'})}catch{}
  if(!b.recName||!b.recAddr||!b.recContact||!b.message||!b.trxId||!b.email)return s.status(400).json({error:'সব দরকারি ঘর পূরণ করুন'});
  const st=await settings();
+ const msg=String(b.message||'').slice(0,6000),wc=msg.trim().split(/\s+/).filter(Boolean).length,xc=wc>st.freeWords?Math.ceil((wc-st.freeWords)/st.blockWords)*st.blockPrice:0;
  if(!st.methods.some(m=>m.on&&m.number&&m.name===b.pay))return s.status(400).json({error:'পেমেন্ট মেথড ঠিক নেই'});
  const id='T'+Date.now().toString(36).toUpperCase();
  const o={id,at:new Date().toISOString(),status:'Pending',senderName:c(b.senderName),anon:!!b.anon,email:c(b.email),wa:c(b.wa),
-  recName:c(b.recName),recAddr:c(b.recAddr),recContact:c(b.recContact),message:c(b.message),extra:c(b.extra),
-  pay:c(b.pay),trxId:c(b.trxId),total:st.base+st.note,adminNote:''};
+  recName:c(b.recName),recAddr:c(b.recAddr),recContact:c(b.recContact),message:msg,extra:c(b.extra),
+  pay:c(b.pay),trxId:c(b.trxId),total:st.base+st.note+xc,words:wc,extraCharge:xc,src:c(b.src).slice(0,40),adminNote:''};
+ try{if((await r('HSETNX','trx',o.trxId.toUpperCase().replace(/\s/g,''),id))==0)o.dup=true}catch{}
  await r('HSET','orders',id,JSON.stringify(o));
  try{
   const t=nm.createTransport({service:'gmail',auth:{user:process.env.GMAIL_USER,pass:process.env.GMAIL_APP_PASS}});
