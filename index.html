@@ -72,6 +72,7 @@ function showRev(L){if(!L||!L.length)return;rw.innerHTML=L.map(x=>`<div class="c
 function showGal(L){if(!L||!L.length)return;gw.innerHTML=L.map(i=>`<img src="/api/public?img=${encodeURIComponent(i)}" alt="হাতে লেখা চিঠির ছবি" loading="lazy">`).join('');gsec.hidden=false}
 const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);const esc=v=>String(v||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
 try{const c=JSON.parse(localStorage.cart||'{}');cn.textContent=bn(Object.values(c).reduce((a,b)=>a+b,0))}catch{}
-fetch('/api/public?v=1').then(r=>r.json()).then(s=>{
+function showSvc(L){if(!Array.isArray(L))return;svcw.innerHTML=L.filter(x=>x.status!='hidden').map(x=>{const live=x.status=='live'&&x.link,st=`style="background:${/^#[0-9a-fA-F]{6}$/.test(x.bg)?x.bg:'#fff'}"`,lab=x.status=='soon'?'শীঘ্রই আসছে':x.status=='off'?'এখন বন্ধ আছে':(x.btn||'দেখো →'),inner=`<span class="e">${esc(x.emoji)}</span><b>${esc(x.title)}</b><small>${esc(x.text)}</small><span class="go">${esc(lab)}</span>`;return live?`<a class="svc1" ${st} href="${esc(x.link)}">${inner}</a>`:`<div class="svc1 soon" ${st}>${inner}</div>`}).join('')}
+fetch('/api/public?v=1').then(r=>r.json()).then(s=>{showSvc(s.services);
  soc.innerHTML=[['Facebook',s.fb],['Instagram',s.ig],['WhatsApp',s.wa&&/^\+?[\d\s-]{6,}$/.test(s.wa)?'https://wa.me/'+s.wa.replace(/\D/g,''):s.wa]].filter(x=>/^https?:\/\//.test(x[1]||'')).map(x=>`<a href="${esc(x[1])}" target="_blank" rel="noopener">${x[0]}</a>`).join('');showPosts(s.posts);showRev(s.reviews);showGal(s.gallery)}).catch(()=>{});
 </script></body></html>
