@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>জিনিস পোস্ট করো — তেইশ টাকা</title>
+<meta name="description" content="ড্যাফোডিল ক্যাম্পাসে হাতে লেখা চিঠি। তোমার কথা আমি নিজের হাতে লিখে প্রিয় মানুষের হাতে পৌঁছে দিই, সঙ্গে ২ টাকার একটা নোট।">
+<meta property="og:type" content="website"><meta property="og:title" content="তেইশ টাকা — চিঠি, যা ভালবাসা বাড়ায়"><meta property="og:description" content="ড্যাফোডিল ক্যাম্পাসে হাতে লেখা চিঠি। সঙ্গে ২ টাকার একটা নোট।"><meta property="og:image" content="https://teish-taka-zquj.vercel.app/og.png"><meta property="og:url" content="https://teish-taka-zquj.vercel.app"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✉️</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Atma:wght@500;700&family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/style.css">
+</head><body><div class="top"><span>ড্যাফোডিল ক্যাম্পাসে হাতে লেখা চিঠি</span><span>হাতে হাতে ডেলিভারি</span><span>সঙ্গে ২ টাকার নোট</span><span>পৌঁছানোর প্রমাণ WhatsApp-এ</span></div><nav><span class="l"><a href="/">হোম</a><a href="/shop">দোকান</a><a href="/track">অর্ডার ট্র্যাক</a></span><a class="logo" href="/" style="text-decoration:none">তেইশ টাকা</a><a href="/shop#cart" class="cartb" aria-label="কার্ট">🛒<i id="cn">0</i></a></nav><div class="pg"><h1>নিজের জিনিস পোস্ট করো</h1><p>পোস্ট ফি দিয়ে জমা দাও। ফি যাচাই করে আমরা অ্যাপ্রুভ করলে সাইটে দেখা যাবে। ক্রেতা আর তোমার ফোন, ইমেইল একে অপরকে দেখানো হয় না।</p></div>
+<section class="pk"><div class="in" style="max-width:640px"><div id="closed" class="card" hidden></div>
+<form id="f" novalidate>
+<fieldset><legend>জিনিস</legend><label>কোন সেবায় পোস্ট করবে?</label><select id="sid" name="sid"></select>
+<label>জিনিসের নাম</label><input name="title" maxlength="100" required>
+<label id="plab">দাম (টাকা)</label><input name="price" type="number" min="1" required>
+<div id="rentw" hidden><label>প্রতিদিনের ভাড়া (টাকা)</label><input name="rent" type="number" min="1"></div>
+<p class="hint" id="phint"></p>
+<label>বিবরণ <small>(অবস্থা, মাপ, কীভাবে ব্যবহার হয়, খাবারের ক্ষেত্রে কী কী আছে ইত্যাদি)</small></label><textarea name="desc" maxlength="800"></textarea>
+<label>ছবি <small>(১ থেকে ৩টা, নিজে ছোট হয়ে যাবে)</small></label><input type="file" id="ph" accept="image/*" multiple><div id="prev" class="row" style="gap:8px;margin-top:6px"></div></fieldset>
+<fieldset><legend>তোমার তথ্য <small>(শুধু আমরা দেখব)</small></legend><label>নাম</label><input name="name" required><label>ফোন</label><input name="phone" type="tel" required><label>ইমেইল</label><input name="email" type="email" required></fieldset>
+<fieldset><legend>পোস্ট ফি</legend><div class="amt">ফি <span id="fee">৫</span> টাকা</div><div class="pay" id="methods"></div><p>এই নম্বরে Send Money করো: <span class="num notranslate" translate="no" id="pn"></span></p><label>TrxID</label><input name="trxId" required autocomplete="off"></fieldset>
+<div class="chk rule"><input type="checkbox" id="agree"><label for="agree">আমার দেওয়া তথ্য ঠিক। জিনিসটা আমার, আর এতে বেআইনি কিছু নেই। ক্রেতার অর্ডার এলে আমি জিনিস/খাবার দিতে রাজি। টাকা সাইট মালিক ডেলিভারির পর আমাকে দেবেন।</label></div>
+<input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+<p id="err" role="alert"></p><button class="btn" id="go">জমা দাও</button></form>
+<div id="done" role="status"><h2>জমা হয়েছে</h2><p>পোস্ট আইডি <b id="oid"></b><br>ফি যাচাই করে অ্যাপ্রুভ করলে সাইটে দেখা যাবে। ইমেইলে খবর যাবে।<br>অবস্থা দেখতে: <a href="/track">/track</a> (পোস্ট আইডি আর ইমেইল লাগবে)</p></div></div></section>
+<footer><div id="soc"></div><a href="/privacy">গোপনীয়তা ও নিয়ম</a><br>তেইশ টাকা &middot; ভালোবাসার একটা ছোট্ট প্রজেক্ট</footer>
+<script>
+const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]),esc=v=>String(v||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+let S={methods:[],services:[]},IM=[];
+const sv=()=>S.services.find(x=>x.id==sid.value);
+function ui(){const v=sv()||{},t=v.type;plab.textContent=t=='borrow'?'জিনিসের নতুন দাম (এটাই ভাড়া নেওয়ার সময় জামানত হবে)':t=='food'?'খাবারের দাম (টাকা)':'দাম (টাকা)';rentw.hidden=t!='borrow';
+ phint.textContent=t=='food'?'ক্রেতাকে দেখানো দামে '+bn(S.foodFee||0)+'% সার্ভিস চার্জ আলাদা যোগ হবে। তুমি তোমার দেওয়া দামটাই পাবে।':t=='borrow'?'কেউ ভাড়া নিলে নতুন দামের সমান টাকা জামানত দেবে। ফেরত দিলে দিনের হিসাবে ভাড়া কেটে বাকিটা ক্রেতা ফেরত পাবে, ভাড়াটা তুমি পাবে।':'কেউ কিনলে ডেলিভারির পর দামটা তুমি পাবে।'}
+sid.onchange=ui;
+const shrink=file=>new Promise((res,rej)=>{const im=new Image(),u=URL.createObjectURL(file);im.onload=()=>{const k=Math.min(1,800/Math.max(im.width,im.height)),w=Math.round(im.width*k),h=Math.round(im.height*k),cv=document.createElement('canvas');cv.width=w;cv.height=h;cv.getContext('2d').drawImage(im,0,0,w,h);let q=.8,d=cv.toDataURL('image/jpeg',q);while(d.length>150000&&q>.3){q-=.1;d=cv.toDataURL('image/jpeg',q)}URL.revokeObjectURL(u);res(d)};im.onerror=()=>rej(Error('ছবি পড়া যায়নি'));im.src=u});
+ph.onchange=async()=>{err.textContent='';try{IM=[];for(const f of[...ph.files].slice(0,3))IM.push(await shrink(f));prev.innerHTML=IM.map(d=>`<img src="${d}" style="width:80px;height:80px;object-fit:cover;border:2px solid #3B2318">`).join('')}catch(e){err.textContent=e.message}};
+function setNum(){const c=document.querySelector('[name=pay]:checked'),m=c&&S.methods.find(m=>m.name==c.value);pn.textContent=m?m.number:''}
+f.addEventListener('change',setNum);
+fetch('/api/sell').then(r=>r.json()).then(s=>{S=s;fee.textContent=bn(s.listFee==null?5:s.listFee);
+ const L=s.services.filter(x=>x.status=='live'),want=new URLSearchParams(location.search).get('s');
+ sid.innerHTML=L.map(x=>`<option value="${esc(x.id)}" ${x.id==want?'selected':''}>${esc(x.emoji)} ${esc(x.title)}</option>`).join('');
+ if(!L.length){closed.hidden=false;closed.textContent='এখন কোনো সেবায় পোস্ট নেওয়া হচ্ছে না।';go.disabled=true}
+ let k=0;methods.innerHTML=s.methods.map(m=>m.on&&m.number?`<label><input type="radio" name="pay" value="${esc(m.name)}" ${k++?'':'checked'}> ${esc(m.name)}</label>`:'').join('');setNum();ui()}).catch(()=>{err.textContent='লোড হয়নি, আবার চেষ্টা করো'});
+f.onsubmit=async e=>{e.preventDefault();err.textContent='';const d=Object.fromEntries(new FormData(f)),t=(sv()||{}).type;
+ for(const k of['title','price','name','phone','email','trxId'])if(!d[k]||!String(d[k]).trim()){err.textContent='সব দরকারি ঘর পূরণ করো';return}
+ if(t=='borrow'&&!(+d.rent>0)){err.textContent='প্রতিদিনের ভাড়া দাও';return}
+ if(t!='food'&&!IM.length){err.textContent='অন্তত একটা ছবি দাও';return}
+ if(!agree.checked){err.textContent='নিচের নিয়মে টিক দাও';return}
+ go.disabled=true;try{const r=await fetch('/api/sell',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...d,photos:IM,agree:true})}),j=await r.json();if(!r.ok)throw Error(j.error);
+  f.style.display='none';oid.textContent=j.id;done.style.display='block';done.scrollIntoView()}catch(x){err.textContent=x.message||'কিছু ভুল হয়েছে, আবার চেষ্টা করো';go.disabled=false}};
+</script></body></html>

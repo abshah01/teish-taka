@@ -64,3 +64,10 @@ a.svc1:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--terra)}
 .pay.one{grid-template-columns:1fr}.hint{font-size:.9rem;opacity:.8;line-height:1.5}
 select{font:inherit;padding:9px 12px;border:2px solid var(--brown);border-radius:10px;background:#fff;color:var(--brown);width:100%}
 [hidden]{display:none!important}
+
+.hc{text-align:center;padding:26px 18px 8px;background:var(--paper,#FFF6E5)}.hc .in{max-width:760px;margin:auto}.hc h1{font:700 clamp(1.8rem,6.5vw,2.9rem)/1.25 Atma;color:var(--red);margin:0 0 8px}.hc p{font-size:1.1rem;line-height:1.6;margin:0 auto 16px;max-width:560px}
+.cta{display:inline-block;background:var(--red);color:#fff;border:3px solid var(--brown);border-radius:999px;padding:12px 34px;min-height:50px;font:700 1.35rem Atma;text-decoration:none;box-shadow:5px 5px 0 var(--brown);transition:transform .15s,box-shadow .15s}.cta:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--brown)}
+.tr{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:18px}.tr span{background:#fff;border:2px solid var(--brown);border-radius:999px;padding:3px 14px;font-size:.95rem}
+.bump{display:flex;gap:8px;align-items:center;background:#fff;border:2px dashed var(--brown);border-radius:12px;padding:8px 12px;margin:8px 0}.bump input{width:auto}.bump b{color:var(--red)}
+input,textarea,select{font-size:16px}.btn{min-height:46px}body:has(.sbar:not([hidden])) footer{padding-bottom:76px}
+@media(max-width:480px){.hc{padding-top:20px}.cta{width:100%;padding:12px 10px}.svc{grid-template-columns:1fr}.pgrid{gap:12px}}

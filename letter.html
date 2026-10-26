@@ -21,7 +21,7 @@
 <div id="s1"><button class="btn" id="nx" type="button">পরের ধাপ</button><p id="e1" role="alert" style="color:var(--red);font-weight:600"></p></div>
 <div id="smy" hidden><div class="card" id="sumc"></div><p><button class="btn" id="ed" type="button" style="background:#fff">চিঠি বদলাব</button> <button class="btn" id="ok2" type="button">ঠিক আছে, পেমেন্টে যাই</button></p></div>
 <div id="s2" hidden><fieldset><legend>পেমেন্ট</legend>
-<div class="amt">মোট <span id="tot">২৫</span> টাকা</div>
+<div id="bumpw"></div><div class="amt">মোট <span id="tot">২৫</span> টাকা</div>
 <div class="pay" id="methods"></div>
 <p>এই নম্বরে Send Money করো: <span class="num notranslate" translate="no" id="pn"></span></p>
 <label>TrxID</label><input name="trxId" required autocomplete="off"></fieldset>
@@ -32,18 +32,19 @@
 <script>
 const bn=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);let S={methods:[]};const esc=v=>String(v||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
 try{const c=JSON.parse(localStorage.cart||'{}');cn.textContent=bn(Object.values(c).reduce((a,b)=>a+b,0))}catch{}
-fetch('/api/public').then(r=>r.json()).then(s=>{S=s;upd();notice.textContent=s.notice;if(s.open===false){go.disabled=true;go.textContent='অর্ডার এখন বন্ধ';nx.disabled=true;nx.textContent='অর্ডার এখন বন্ধ';e1.textContent=s.closedMsg||'এখন অর্ডার নেওয়া বন্ধ আছে। একটু পরে আবার দেখো।';notice.textContent=s.closedMsg||'এখন অর্ডার নেওয়া বন্ধ আছে। একটু পরে আবার দেখো।'}let k=0;methods.innerHTML=s.methods.map(m=>m.on&&m.number?`<label><input type="radio" name="pay" value="${esc(m.name)}" ${k++?'':'checked'}> ${esc(m.name)}</label>`:`<label class="soon"><input type="radio" disabled> ${esc(m.name)}</label>`).join('');setNum();
+fetch('/api/public').then(r=>r.json()).then(s=>{S=s;bumpw.innerHTML=(s.bumps||[]).filter(x=>x.on&&x.name).map(x=>`<label class="bump"><input type="checkbox" class="bk" value="${esc(x.id)}" onchange="upd()"> <span>➕ ${esc(x.name)} <b>+${bn(x.price)} টাকা</b></span></label>`).join('');upd();notice.textContent=s.notice;if(s.open===false){go.disabled=true;go.textContent='অর্ডার এখন বন্ধ';nx.disabled=true;nx.textContent='অর্ডার এখন বন্ধ';e1.textContent=s.closedMsg||'এখন অর্ডার নেওয়া বন্ধ আছে। একটু পরে আবার দেখো।';notice.textContent=s.closedMsg||'এখন অর্ডার নেওয়া বন্ধ আছে। একটু পরে আবার দেখো।'}let k=0;methods.innerHTML=s.methods.map(m=>m.on&&m.number?`<label><input type="radio" name="pay" value="${esc(m.name)}" ${k++?'':'checked'}> ${esc(m.name)}</label>`:`<label class="soon"><input type="radio" disabled> ${esc(m.name)}</label>`).join('');setNum();
  soc.innerHTML=[['Facebook',s.fb],['Instagram',s.ig],['WhatsApp',s.wa&&/^\+?[\d\s-]{6,}$/.test(s.wa)?'https://wa.me/'+s.wa.replace(/\D/g,''):s.wa]].filter(x=>/^https?:\/\//.test(x[1]||'')).map(x=>`<a href="${esc(x[1])}" target="_blank" rel="noopener">${x[0]}</a>`).join('');}).catch(()=>{});
-function calc(){const w=f.message.value.trim().split(/\s+/).filter(Boolean).length,a=S.freeWords||150,bl=S.blockWords||100,pr=S.blockPrice==null?10:S.blockPrice,x=w>a?Math.ceil((w-a)/bl)*pr:0;return{w,a,x,t:(S.base||23)+(S.note||2)+x}}
+function calc(){const w=f.message.value.trim().split(/\s+/).filter(Boolean).length,a=S.freeWords||150,bl=S.blockWords||100,pr=S.blockPrice==null?10:S.blockPrice,x=w>a?Math.ceil((w-a)/bl)*pr:0;return{w,a,x,t:(S.base||23)+(S.note||2)+x+bsum()}}
+const bsel=()=>[...document.querySelectorAll('.bk:checked')].map(i=>i.value),bsum=()=>bsel().reduce((a,id)=>a+((S.bumps||[]).find(x=>x.id==id)||{price:0}).price,0);
 function upd(){const c=calc();tot.textContent=bn(c.t);wc.textContent=c.w?bn(c.w)+' শব্দ'+(c.x?' · বাড়তি '+bn(c.x)+' টাকা':''):'';if(!s2.hidden||!smy.hidden){s2.hidden=true;smy.hidden=true;nx.hidden=false}}
 nx.onclick=()=>{e1.textContent='';for(const k of['recName','recAddr','recContact','message','email','wa'])if(!f[k].value.trim()){e1.textContent='সব দরকারি ঘর পূরণ করো';f[k].focus();return}
- const c=calc();sumc.innerHTML='<b>তোমার চিঠি '+bn(c.w)+' শব্দের</b>'+(c.x?bn(c.a)+' শব্দের পর বাড়তি '+bn(c.x)+' টাকা যোগ হয়েছে।':bn(c.a)+' শব্দের মধ্যে, তাই বাড়তি খরচ নেই।')+'<br><b>মোট '+bn(c.t)+' টাকা</b><small>চিঠি বাড়ালে বা কমালে টাকাও সেই অনুযায়ী বদলাবে। বদলাতে চাইলে নিচের "চিঠি বদলাব" চাপো।</small>';smy.hidden=false;nx.hidden=true;smy.scrollIntoView({behavior:'smooth',block:'center'})};
+ const c=calc();sumc.innerHTML='<b>তোমার চিঠি '+bn(c.w)+' শব্দের</b>'+(c.x?bn(c.a)+' শব্দের পর বাড়তি '+bn(c.x)+' টাকা যোগ হয়েছে।':bn(c.a)+' শব্দের মধ্যে, তাই বাড়তি খরচ নেই।')+(bsel().length?'<br>অতিরিক্ত: '+bsel().map(id=>esc(((S.bumps||[]).find(x=>x.id==id)||{}).name)).join(', '):'')+'<br><b>মোট '+bn(c.t)+' টাকা</b><small>চিঠি বাড়ালে বা কমালে টাকাও সেই অনুযায়ী বদলাবে। বদলাতে চাইলে নিচের "চিঠি বদলাব" চাপো।</small>';smy.hidden=false;nx.hidden=true;smy.scrollIntoView({behavior:'smooth',block:'center'})};
 ed.onclick=()=>{smy.hidden=true;s2.hidden=true;nx.hidden=false;f.message.focus()};
 ok2.onclick=()=>{smy.hidden=true;s2.hidden=false;s2.scrollIntoView({behavior:'smooth'})};
 f.message.addEventListener('input',upd);
 function setNum(){const c=document.querySelector('[name=pay]:checked'),m=c&&S.methods.find(m=>m.name==c.value);pn.textContent=m?m.number:''}
 f.addEventListener('change',setNum);
-f.onsubmit=async e=>{e.preventDefault();if(s2.hidden){nx.click();return}err.textContent='';const d=Object.fromEntries(new FormData(f));d.anon=anon.checked;d.agree=agree.checked;d.src=new URLSearchParams(location.search).get('src')||(document.referrer?new URL(document.referrer).hostname:'direct');if(!d.agree){err.textContent='চিঠি লেখার নিয়মে টিক দাও';return}
+f.onsubmit=async e=>{e.preventDefault();if(s2.hidden){nx.click();return}err.textContent='';const d=Object.fromEntries(new FormData(f));d.anon=anon.checked;d.bumps=bsel();d.agree=agree.checked;d.src=new URLSearchParams(location.search).get('src')||(document.referrer?new URL(document.referrer).hostname:'direct');if(!d.agree){err.textContent='চিঠি লেখার নিয়মে টিক দাও';return}
  for(const k of['recName','recAddr','recContact','message','email','wa','trxId'])if(!d[k]||!d[k].trim()){err.textContent='সব দরকারি ঘর পূরণ করো';return}
  go.disabled=true;try{const r=await fetch('/api/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)}),j=await r.json();
  if(!r.ok)throw Error(j.error);f.style.display='none';oid.textContent=j.id;done.style.display='block';done.scrollIntoView()}catch(x){err.textContent=x.message||'কিছু একটা ভুল হয়েছে, আবার চেষ্টা করো';go.disabled=false}};
