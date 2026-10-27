@@ -83,3 +83,21 @@ Service types in admin (settings.services[].type): link | shop | market | borrow
 - Admin settings added: listFee, foodFee. Hero/trust/order-bump/per-button items as in Phase 1.5.
 Open/unverified: food licence/food-safety rules (owner must check), late return penalty (rent simply continues per day; owner enters real days), Gmail App Password 535 error must be fixed for emails to work, Upstash free plan storage/command limits.
 Tested with a fake Redis + headless browser at 390px: sell, approve, buy mixed cart, borrow return, ledger, cancel/release all worked.
+
+## IDEA BACKLOG 2 (owner sent "V4 Dynamic Combo Admin Update" doc; ALL 5 items BUILT, see PHASE 4 STATUS below)
+The doc is written for React/Next.js/Tailwind. This project is flat HTML + Vercel functions, so DO NOT rewrite in React; adapt the ideas only:
+1. **Gift combos with categories.** Gift shop products get a `category` (default four: 🎂 জন্মদিনের কম্বো, 🤝 বন্ধু কম্বো, ❤️ ভালোবাসার কম্বো, 🥺 রাগ ভাঙানোর কম্বো; the category list itself must be editable in admin Settings, add/rename/delete). New product fields: category, combo title, photo (upload; optionally an image URL), "included items" text (e.g. চিঠি + ২ টাকার নোট + কি রিং + চকলেট) separate from description, price, one-click In stock / Out of stock toggle (keep numeric stock too). Shop page shows category tabs. First launch shows a few clearly-labelled demo/placeholder combo cards that admin can delete. Already built: product add/edit/delete, photo, price, stock, per-button shops.
+2. **Landing page.** Move the long letter story/literature sections off the home page into `/letter` (or a modal). Home keeps equal, uniform service cards (already done).
+3. **Admin as tabs to cut scrolling.** Tab buttons: ✉️ চিঠি | 🎁 উপহার ও কম্বো | 📚 মার্কেটপ্লেস (বই, ধার, খাবার: pending/approve/edit/delete) | 💳 পেমেন্ট ও ইনভয়েস (TrxID check, status, invoice preview) plus Home/Settings/Hisab tabs. Today admin is one long page.
+4. **3-step seller listing flow** on /sell: step 1 item + photos, step 2 seller details, step 3 fee payment + review. (Today it is one form.)
+5. **Automatic digital receipt/invoice.** When admin verifies payment (status Paid), email an elegant invoice (order ID, item breakdown, delivery, bumps, paid online, due on delivery, payment status) with a heart-touching Bangla thank-you note; also a printable invoice page (e.g. /invoice?id=&email=) and an admin invoice preview. Must be editable thank-you text in admin.
+Not applicable: React/Next/Tailwind code, SaaS pricing.
+
+## PHASE 4 STATUS (built from Backlog 2, tested with fake Redis + headless browser)
+Owner instruction: do NOT wait for more instructions, build what is asked immediately.
+- Gift combos: settings.categories (editable lines in admin Settings; defaults: জন্মদিন/বন্ধু/ভালোবাসা/রাগ ভাঙানো). Product fields added: cat, inc ("কী কী আছে"), imgUrl (https only), out (one-click "স্টক শেষ করো / স্টকে আনো", independent of numeric stock). Shop page shows category tabs (সব, each category, অন্যান্য) for shop-type services and 4 clearly-labelled demo cards when the gift shop has no products (not orderable).
+- Home: letter story sections (চিঠি আবার ফিরে আসুক, কী কী পাবে, দুই টাকার গল্প, চিঠির ইতিহাস, কীভাবে হয়) moved to /letter (below the form). Home has hero, equal service cards, gallery/reviews/posts, FAQ.
+- Admin: tab bar (✉️ চিঠি ও অর্ডার | 🎁 উপহার ও কম্বো | 📚 মার্কেটপ্লেস | 💳 পেমেন্ট ও ইনভয়েস | 🖼 কনটেন্ট | ⚙️ হোম ও সেটিংস); last tab remembered in localStorage.atab. Payment tab lists Pending orders with TrxID/duplicate warning and "Paid করো + ইনভয়েস", plus recent verified orders, and the seller ledger.
+- Invoice: lib.invoiceBody(o,st,host). Setting Paid emails the invoice (replaces the plain "Paid" status email); admin can preview/resend; customers open /invoice?id=&email= (api-invoice.js, printable, linked from /track once not Pending). Thank-you text = settings.thanks (editable).
+- Seller form /sell is now 3 steps (item, your info, review + fee).
+Admin function names to avoid clashing with element ids: qs is the order search input (post save function is qsv), tab(), rpay(), inv(), ptog().

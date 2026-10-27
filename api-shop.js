@@ -7,11 +7,11 @@ module.exports=async(q,s)=>{
   if(q.query.img)return serve(await r('HGET','pimgs',String(q.query.img)),s);
   if(q.query.pimg)return serve(await r('HGET','pimgs',String(q.query.pimg)+':'+(parseInt(q.query.n)||0)),s);
   const g=await settings(),pr=await H('products'),SK=await H('stock'),CL=await H('claims'),PO=await H('posts'),L=[];
-  for(const k in pr){const p=JSON.parse(pr[k]);if(p.active===false)continue;L.push({id:p.id,sid:p.sid||'s2',kind:'shop',name:p.name,price:p.price,desc:p.desc,v:p.v,img:!!p.img,left:Math.max(0,Math.min(99,+SK[p.id]||0))})}
+  for(const k in pr){const p=JSON.parse(pr[k]);if(p.active===false)continue;L.push({id:p.id,sid:p.sid||'s2',kind:'shop',name:p.name,price:p.price,desc:p.desc,cat:p.cat||'',inc:p.inc||'',imgUrl:p.imgUrl||'',v:p.v,img:!!p.img,left:p.out?0:Math.max(0,Math.min(99,+SK[p.id]||0))})}
   const P=[];for(const k in PO){try{const p=JSON.parse(PO[k]);if(p.status!=='Live')continue;const sv=(g.services||[]).find(x=>x.id===p.sid);if(!sv)continue;const kind=sv.type,taken=!!CL[p.id]&&kind!=='food',state=taken?(kind==='borrow'?'booked':'sold'):'live';
    P.push({id:p.id,sid:p.sid,kind,name:p.title,price:kind==='food'?Math.ceil(p.price*(1+(g.foodFee||0)/100)):p.price,desc:p.desc,rent:p.rent||0,photos:p.photos||0,v:p.at,state,left:state==='live'?(kind==='food'?20:1):0})}catch{}}
   const all=[...L.sort((x,y)=>(y.v||0)-(x.v||0)),...P.sort((x,y)=>(y.v||0)-(x.v||0)).slice(0,300)];
-  s.setHeader('Cache-Control','no-store');return s.json({items:all,methods:g.methods,delivery:g.delivery,halfMin:g.halfMin,base:g.base,note:g.note,freeWords:g.freeWords,blockWords:g.blockWords,blockPrice:g.blockPrice,shopOpen:g.shopOpen!==false,open:g.open!==false,closedMsg:g.closedMsg,notice:g.notice,listFee:g.listFee,foodFee:g.foodFee,services:(g.services||[]).map(x=>({id:x.id,type:x.type,emoji:x.emoji,title:x.title,text:x.text,status:x.status})),bumps:(g.bumps||[]).filter(x=>x.on&&x.name)})}
+  s.setHeader('Cache-Control','no-store');return s.json({items:all,methods:g.methods,delivery:g.delivery,halfMin:g.halfMin,base:g.base,note:g.note,freeWords:g.freeWords,blockWords:g.blockWords,blockPrice:g.blockPrice,shopOpen:g.shopOpen!==false,open:g.open!==false,closedMsg:g.closedMsg,notice:g.notice,categories:g.categories||[],listFee:g.listFee,foodFee:g.foodFee,services:(g.services||[]).map(x=>({id:x.id,type:x.type,emoji:x.emoji,title:x.title,text:x.text,status:x.status})),bumps:(g.bumps||[]).filter(x=>x.on&&x.name)})}
  if(q.method!=='POST')return s.status(405).end();
  const b=q.body||{};if(b.website)return s.json({ok:true,id:'S0'});
  const st=await settings();if(st.shopOpen===false)return s.status(403).json({error:'দোকান এখন বন্ধ আছে। একটু পরে আবার চেষ্টা করো।'});
@@ -37,7 +37,7 @@ module.exports=async(q,s)=>{
    lines.push({pid:p.id,name:p.title,price,qty,ok:true,kind,sellerAmt:p.price,sellerKey:p.seller.key,sellerName:p.seller.name,sellerPhone:p.seller.phone,rent:kind==='borrow'?p.rent:undefined,deposit:kind==='borrow'?p.price:undefined});continue}
   const p=P[x.pid];if(!p||p.active===false)return fail('একটা জিনিস আর পাওয়া যাচ্ছে না। কার্ট ঠিক করে আবার চেষ্টা করো।');
   if(svOff(p.sid||'s2'))return fail('“'+p.name+'” যে সেবার, সেটা এখন বন্ধ আছে। কার্ট থেকে বাদ দাও।',403);
-  const left=await r('HINCRBY','stock',p.id,-x.qty);taken.push([p.id,x.qty]);
+  if(p.out)return fail('“'+p.name+'” এর স্টক শেষ।');const left=await r('HINCRBY','stock',p.id,-x.qty);taken.push([p.id,x.qty]);
   if(left<0)return fail('“'+p.name+'” এর স্টক এখন যথেষ্ট নেই। সংখ্যা কমাও বা অন্য জিনিস নাও।');
   lines.push({pid:p.id,name:p.name,price:p.price,qty:x.qty,ok:true,kind:'shop'})}
  const o={id,kind:'shop',at:new Date().toISOString(),status:'Pending',name:c(b.name,120),phone:c(b.phone,40),email:c(b.email,120),addr:c(b.addr,500),lines,letter:null,letterTotal:0,pay:c(b.pay,20),trxId:c(b.trxId,60),src:c(b.src,40),adminNote:'',custMsg:'',bumps:pickBumps(b.bumps,st)};

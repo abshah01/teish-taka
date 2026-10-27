@@ -8,18 +8,16 @@
 </head><body><div class="top"><span>ড্যাফোডিল ক্যাম্পাসে হাতে লেখা চিঠি</span><span>হাতে হাতে ডেলিভারি</span><span>সঙ্গে ২ টাকার নোট</span><span>পৌঁছানোর প্রমাণ WhatsApp-এ</span></div><nav><span class="l"><a href="/">হোম</a><a href="/shop">দোকান</a><a href="/track">অর্ডার ট্র্যাক</a></span><a class="logo" href="/" style="text-decoration:none">তেইশ টাকা</a><a href="/shop#cart" class="cartb" aria-label="কার্ট">🛒<i id="cn">0</i></a></nav><div class="pg"><h1>নিজের জিনিস পোস্ট করো</h1><p>পোস্ট ফি দিয়ে জমা দাও। ফি যাচাই করে আমরা অ্যাপ্রুভ করলে সাইটে দেখা যাবে। ক্রেতা আর তোমার ফোন, ইমেইল একে অপরকে দেখানো হয় না।</p></div>
 <section class="pk"><div class="in" style="max-width:640px"><div id="closed" class="card" hidden></div>
 <form id="f" novalidate>
-<fieldset><legend>জিনিস</legend><label>কোন সেবায় পোস্ট করবে?</label><select id="sid" name="sid"></select>
+<div class="sti" id="sti"></div><div class="stp" data-s="0"><fieldset><legend>ধাপ ১: জিনিস</legend><label>কোন সেবায় পোস্ট করবে?</label><select id="sid" name="sid"></select>
 <label>জিনিসের নাম</label><input name="title" maxlength="100" required>
 <label id="plab">দাম (টাকা)</label><input name="price" type="number" min="1" required>
 <div id="rentw" hidden><label>প্রতিদিনের ভাড়া (টাকা)</label><input name="rent" type="number" min="1"></div>
 <p class="hint" id="phint"></p>
 <label>বিবরণ <small>(অবস্থা, মাপ, কীভাবে ব্যবহার হয়, খাবারের ক্ষেত্রে কী কী আছে ইত্যাদি)</small></label><textarea name="desc" maxlength="800"></textarea>
-<label>ছবি <small>(১ থেকে ৩টা, নিজে ছোট হয়ে যাবে)</small></label><input type="file" id="ph" accept="image/*" multiple><div id="prev" class="row" style="gap:8px;margin-top:6px"></div></fieldset>
-<fieldset><legend>তোমার তথ্য <small>(শুধু আমরা দেখব)</small></legend><label>নাম</label><input name="name" required><label>ফোন</label><input name="phone" type="tel" required><label>ইমেইল</label><input name="email" type="email" required></fieldset>
-<fieldset><legend>পোস্ট ফি</legend><div class="amt">ফি <span id="fee">৫</span> টাকা</div><div class="pay" id="methods"></div><p>এই নম্বরে Send Money করো: <span class="num notranslate" translate="no" id="pn"></span></p><label>TrxID</label><input name="trxId" required autocomplete="off"></fieldset>
+<label>ছবি <small>(১ থেকে ৩টা, নিজে ছোট হয়ে যাবে)</small></label><input type="file" id="ph" accept="image/*" multiple><div id="prev" class="row" style="gap:8px;margin-top:6px"></div></fieldset></div><div class="stp" data-s="1" hidden><fieldset><legend>ধাপ ২: তোমার তথ্য <small>(শুধু আমরা দেখব)</small></legend><label>নাম</label><input name="name" required><label>ফোন</label><input name="phone" type="tel" required><label>ইমেইল</label><input name="email" type="email" required></fieldset></div><div class="stp" data-s="2" hidden><div class="card" id="rev"></div><fieldset><legend>ধাপ ৩: পোস্ট ফি</legend><div class="amt">ফি <span id="fee">৫</span> টাকা</div><div class="pay" id="methods"></div><p>এই নম্বরে Send Money করো: <span class="num notranslate" translate="no" id="pn"></span></p><label>TrxID</label><input name="trxId" required autocomplete="off"></fieldset>
 <div class="chk rule"><input type="checkbox" id="agree"><label for="agree">আমার দেওয়া তথ্য ঠিক। জিনিসটা আমার, আর এতে বেআইনি কিছু নেই। ক্রেতার অর্ডার এলে আমি জিনিস/খাবার দিতে রাজি। টাকা সাইট মালিক ডেলিভারির পর আমাকে দেবেন।</label></div>
-<input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
-<p id="err" role="alert"></p><button class="btn" id="go">জমা দাও</button></form>
+</div><input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+<p id="err" role="alert"></p><p><button class="btn" id="back" type="button" style="background:#fff" hidden>← আগের ধাপ</button> <button class="btn" id="nextb" type="button">পরের ধাপ →</button> <button class="btn" id="go" hidden>জমা দাও</button></p></form>
 <div id="done" role="status"><h2>জমা হয়েছে</h2><p>পোস্ট আইডি <b id="oid"></b><br>ফি যাচাই করে অ্যাপ্রুভ করলে সাইটে দেখা যাবে। ইমেইলে খবর যাবে।<br>অবস্থা দেখতে: <a href="/track">/track</a> (পোস্ট আইডি আর ইমেইল লাগবে)</p></div></div></section>
 <footer><div id="soc"></div><a href="/privacy">গোপনীয়তা ও নিয়ম</a><br>তেইশ টাকা &middot; ভালোবাসার একটা ছোট্ট প্রজেক্ট</footer>
 <script>
@@ -38,7 +36,14 @@ fetch('/api/sell').then(r=>r.json()).then(s=>{S=s;fee.textContent=bn(s.listFee==
  sid.innerHTML=L.map(x=>`<option value="${esc(x.id)}" ${x.id==want?'selected':''}>${esc(x.emoji)} ${esc(x.title)}</option>`).join('');
  if(!L.length){closed.hidden=false;closed.textContent='এখন কোনো সেবায় পোস্ট নেওয়া হচ্ছে না।';go.disabled=true}
  let k=0;methods.innerHTML=s.methods.map(m=>m.on&&m.number?`<label><input type="radio" name="pay" value="${esc(m.name)}" ${k++?'':'checked'}> ${esc(m.name)}</label>`:'').join('');setNum();ui()}).catch(()=>{err.textContent='লোড হয়নি, আবার চেষ্টা করো'});
-f.onsubmit=async e=>{e.preventDefault();err.textContent='';const d=Object.fromEntries(new FormData(f)),t=(sv()||{}).type;
+let ST=0;
+function show(n){ST=n;document.querySelectorAll('.stp').forEach(x=>x.hidden=+x.dataset.s!==n);back.hidden=n==0;nextb.hidden=n==2;go.hidden=n!=2;sti.innerHTML=['১. জিনিস','২. তোমার তথ্য','৩. ফি ও জমা'].map((t,i)=>`<span style="display:inline-block;padding:2px 12px;margin:0 4px 6px 0;border:2px solid #3B2318;border-radius:999px;font-weight:600;${i==n?'background:#FFC93C':'background:#fff;opacity:.7'}">${t}</span>`).join('');
+ if(n==2){const v=sv()||{};rev.innerHTML='<b>তুমি পোস্ট করছ:</b> '+esc(f.title.value)+' · '+bn(f.price.value)+' টাকা'+(v.type=='borrow'?' · ভাড়া '+bn(f.rent.value||0)+' টাকা/দিন':'')+' · ছবি '+bn(IM.length)+'টা<br><small>'+esc(f.name.value)+' · '+esc(f.phone.value)+'</small>'}
+ window.scrollTo({top:0,behavior:'smooth'})}
+function chk(n){err.textContent='';const t=(sv()||{}).type;if(n==0){if(!f.title.value.trim()||!(+f.price.value>0)){err.textContent='জিনিসের নাম আর দাম দাও';return false}if(t=='borrow'&&!(+f.rent.value>0)){err.textContent='প্রতিদিনের ভাড়া দাও';return false}if(t!='food'&&!IM.length){err.textContent='অন্তত একটা ছবি দাও';return false}}
+ if(n==1&&(!f.name.value.trim()||!f.phone.value.trim()||!f.email.value.trim())){err.textContent='নাম, ফোন আর ইমেইল দাও';return false}return true}
+nextb.onclick=()=>{if(chk(ST))show(ST+1)};back.onclick=()=>show(ST-1);show(0);
+f.onsubmit=async e=>{e.preventDefault();if(ST<2){if(chk(ST))show(ST+1);return}err.textContent='';const d=Object.fromEntries(new FormData(f)),t=(sv()||{}).type;
  for(const k of['title','price','name','phone','email','trxId'])if(!d[k]||!String(d[k]).trim()){err.textContent='সব দরকারি ঘর পূরণ করো';return}
  if(t=='borrow'&&!(+d.rent>0)){err.textContent='প্রতিদিনের ভাড়া দাও';return}
  if(t!='food'&&!IM.length){err.textContent='অন্তত একটা ছবি দাও';return}

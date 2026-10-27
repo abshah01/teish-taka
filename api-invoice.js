@@ -1,0 +1,5 @@
+const {r,settings,invoiceBody}=require('./lib');
+module.exports=async(q,s)=>{const id=String(q.query.id||'').trim().toUpperCase(),em=String(q.query.email||'').trim().toLowerCase();
+ const v=id&&id[0]!=='Q'&&await r('HGET','orders',id);if(!v)return s.status(404).end('অর্ডার পাওয়া যায়নি');const o=JSON.parse(v);if(String(o.email).toLowerCase()!==em)return s.status(404).end('অর্ডার পাওয়া যায়নি');
+ const st=await settings();s.setHeader('Content-Type','text/html; charset=utf-8');s.setHeader('Cache-Control','no-store');
+ s.end(`<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ইনভয়েস ${id} — তেইশ টাকা</title><link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet"></head><body style="margin:0;padding:14px;background:#F9D3CB">${invoiceBody(o,st,q.headers.host)}<p style="text-align:center"><button onclick="print()" style="font:600 1rem 'Hind Siliguri',sans-serif;padding:8px 22px;border:2px solid #3B2318;border-radius:999px;background:#FFC93C;cursor:pointer">প্রিন্ট / PDF সেভ</button></p></body></html>`)};
